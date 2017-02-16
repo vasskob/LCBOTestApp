@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.obezhenar.lcbotestapp.R;
 import com.obezhenar.lcbotestapp.screens.base.OnItemClickListener;
 import com.obezhenar.lcbotestapp.screens.stores.model.StoreModel;
+import com.paginate.recycler.LoadingListItemCreator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,12 @@ public class StoresListAdapter extends RecyclerView.Adapter<StoresItemViewHolder
     }
 
     public void setData(@NonNull List<StoreModel> data) {
-        this.data = data;
+        this.data.addAll(data);
         notifyDataSetChanged();
+    }
+
+    public void clearData() {
+        data.clear();
     }
 
     @Override
@@ -36,10 +41,12 @@ public class StoresListAdapter extends RecyclerView.Adapter<StoresItemViewHolder
 
     @Override
     public void onBindViewHolder(StoresItemViewHolder holder, int position) {
-        final StoreModel store = data.get(position);
-        holder.titleTextView.setText(store.getName());
-        holder.addressTextView.setText(store.getAddress());
-        holder.itemView.setOnClickListener(view -> onItemClickListener.onItemClick(view, store));
+        if (position < getItemCount()) {
+            final StoreModel store = data.get(position);
+            holder.titleTextView.setText(store.getName());
+            holder.addressTextView.setText(store.getAddress());
+            holder.itemView.setOnClickListener(view -> onItemClickListener.onItemClick(view, store));
+        }
     }
 
     @Override

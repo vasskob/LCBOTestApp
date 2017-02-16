@@ -22,7 +22,12 @@ import com.obezhenar.lcbotestapp.screens.stores.model.StoreModel;
 import com.obezhenar.lcbotestapp.screens.stores.model.StoresFilter;
 import com.obezhenar.lcbotestapp.screens.stores.presenter.StoresPresenter;
 import com.obezhenar.lcbotestapp.screens.stores.view.dialog.StoresFilterDialog;
+import com.obezhenar.lcbotestapp.screens.stores.view.list.StoresItemViewHolder;
 import com.obezhenar.lcbotestapp.screens.stores.view.list.StoresListAdapter;
+import com.obezhenar.lcbotestapp.screens.stores.view.list.StoresLoadingListItemCreator;
+import com.paginate.Paginate;
+import com.paginate.recycler.LoadingListItemCreator;
+import com.paginate.recycler.LoadingListItemSpanLookup;
 
 import java.util.List;
 
@@ -38,6 +43,7 @@ public class StoresFragment extends Fragment implements StoresView {
     ProgressBar progressBar;
     @Inject
     StoresPresenter presenter;
+    private boolean isItmesLoading;
 
     private StoresFilter storesFilter = new StoresFilter();
 
@@ -66,6 +72,30 @@ public class StoresFragment extends Fragment implements StoresView {
         storesRecyclerView.setAdapter(adapter);
         presenter.attach(this);
         presenter.loadStores(storesFilter);
+        initPagination();
+    }
+
+    private void initPagination() {
+        Paginate.with(storesRecyclerView, new Paginate.Callbacks() {
+            @Override
+            public void onLoadMore() {
+                isItmesLoading = true;
+                presenter.onLoadMore();
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isItmesLoading;
+            }
+
+            @Override
+            public boolean hasLoadedAllItems() {
+                return false;
+            }
+        }).setLoadingTriggerThreshold(2)
+                .addLoadingListItem(true)
+                .setLoadingListItemCreator(new StoresLoadingListItemCreator())
+                .build();
     }
 
     @Override
@@ -119,6 +149,7 @@ public class StoresFragment extends Fragment implements StoresView {
 
     @Override
     public void displayStores(List<StoreModel> stores) {
+        isItmesLoading = false;
         if (stores != null)
             adapter.setData(stores);
     }
@@ -135,8 +166,13 @@ public class StoresFragment extends Fragment implements StoresView {
 
     @Override
     public void setShowProgress(boolean showProgress) {
-        storesRecyclerView.setVisibility(showProgress ? View.GONE : View.VISIBLE);
-        progressBar.setVisibility(showProgress ? View.VISIBLE : View.GONE);
+        storesRecyclerView.setVisibility(showProgress && !isItmesLoading ? View.GONE : View.VISIBLE);
+        progressBar.setVisibility(showProgress && !isItmesLoading ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void clearList() {
+        adapter.clearData();
     }
 
     @Override

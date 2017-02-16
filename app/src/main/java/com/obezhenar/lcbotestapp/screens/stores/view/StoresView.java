@@ -12,4 +12,6 @@ public interface StoresView {
     void showStoreDetails(StoreModel storeModel);
 
     void setShowProgress(boolean showProgress);
+
+    void clearList();
 }

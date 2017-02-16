@@ -41,6 +41,7 @@ public class StoresPresenterImpl implements StoresPresenter {
 
     @Override
     public void loadStores(StoresFilter filter) {
+        view.clearList();
         loadStoresRequestModel.setHasBeerColdRoom(filter.getHasBeerColdRoom());
         loadStoresRequestModel.setHasBilingualServices(filter.getHasBilingualServices());
         loadStoresRequestModel.setHasParking(filter.getHasParking());

@@ -14,7 +14,7 @@ public class StoresActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stores);
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.content, new StoresFragment())
+                .replace(R.id.content, new StoresFragment())
                 .commit();
     }
 }
