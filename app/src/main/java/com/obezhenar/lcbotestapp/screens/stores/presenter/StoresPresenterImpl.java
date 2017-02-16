@@ -6,6 +6,7 @@ import com.obezhenar.lcbotestapp.domain.Interactor;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
 import com.obezhenar.lcbotestapp.domain.stores.load.model.request.LoadStoresRequestModel;
 import com.obezhenar.lcbotestapp.screens.stores.model.StoreModel;
+import com.obezhenar.lcbotestapp.screens.stores.model.StoresFilter;
 import com.obezhenar.lcbotestapp.screens.stores.view.StoresView;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import rx.schedulers.Schedulers;
 public class StoresPresenterImpl implements StoresPresenter {
     private Interactor<LoadStoresRequestModel, Observable<List<Store>>> loadStoresInteractor;
     private StoresView view;
+    private LoadStoresRequestModel loadStoresRequestModel = new LoadStoresRequestModel();
 
     @Inject
     public StoresPresenterImpl(Interactor<LoadStoresRequestModel, Observable<List<Store>>> loadStoresInteractor) {
@@ -33,13 +35,34 @@ public class StoresPresenterImpl implements StoresPresenter {
 
     @Override
     public void onLoadMore() {
-        loadStoresInteractor.invoke(new LoadStoresRequestModel())
+        loadStoresRequestModel.setPageNumber(loadStoresRequestModel.getPageNumber() + 1);
+        load();
+    }
+
+    @Override
+    public void loadStores(StoresFilter filter) {
+        loadStoresRequestModel.setHasBeerColdRoom(filter.getHasBeerColdRoom());
+        loadStoresRequestModel.setHasBilingualServices(filter.getHasBilingualServices());
+        loadStoresRequestModel.setHasParking(filter.getHasParking());
+        loadStoresRequestModel.setHasTastingBar(filter.getHasTastingBar());
+        loadStoresRequestModel.setHasVintagesCorner(filter.getHasVintagesCorner());
+        loadStoresRequestModel.setHasWheelChairAccessibility(filter.getHasWheelChairAccessibility());
+        load();
+    }
+
+    private void load() {
+        view.setShowProgress(true);
+        loadStoresInteractor.invoke(loadStoresRequestModel)
                 .subscribeOn(Schedulers.newThread())
                 .map(stores -> mapToStoreModel(stores))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        stores -> view.displayStores(stores),
+                        stores -> {
+                            view.setShowProgress(false);
+                            view.displayStores(stores);
+                        },
                         throwable -> view.displayError(throwable.getMessage())
+
                 );
     }
 

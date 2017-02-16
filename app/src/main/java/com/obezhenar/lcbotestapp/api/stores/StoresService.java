@@ -12,21 +12,12 @@ import rx.Observable;
 
 public interface StoresService {
     @GET("/stores")
+
     Observable<StoresResponse> loadStores(
             @Header("Authorization")
                     String token,
-            @Query("has_wheelchair_accessability")
-                    Boolean hasWheelChairAccessability,
-            @Query("has_bilingual_services")
-                    Boolean hasBilingualServices,
-            @Query("has_parking")
-                    Boolean hasParking,
-            @Query("has_tasting_bar")
-                    Boolean hasTastingBar,
-            @Query("has_beer_cold_room")
-                    Boolean hasBeerColdRoom,
-            @Query("has_beer_cold_room")
-                    Boolean hasVintagesCorner,
+            @Query("where")
+                    String where,
             @Query("page")
                     Integer pageNumber
     );

@@ -1,33 +1,23 @@
-package com.obezhenar.lcbotestapp.domain.stores.load.model.request;
+package com.obezhenar.lcbotestapp.screens.stores.model;
 
-public class LoadStoresRequestModel {
+public class StoresFilter {
     private Boolean hasWheelChairAccessibility;
     private Boolean hasBilingualServices;
     private Boolean hasParking;
     private Boolean hasTastingBar;
     private Boolean hasBeerColdRoom;
     private Boolean hasVintagesCorner;
-    private Integer pageNumber = 1;
 
-    public LoadStoresRequestModel() {
+    public StoresFilter() {
     }
 
-    public LoadStoresRequestModel(Boolean hasWheelChairAccessibility, Boolean hasBilingualServices, Boolean hasParking, Boolean hasTastingBar, Boolean hasBeerColdRoom, Boolean hasVintagesCorner, Integer pageNumber) {
+    public StoresFilter(Boolean hasWheelChairAccessibility, Boolean hasBilingualServices, Boolean hasParking, Boolean hasTastingBar, Boolean hasBeerColdRoom, Boolean hasVintagesCorner) {
         this.hasWheelChairAccessibility = hasWheelChairAccessibility;
         this.hasBilingualServices = hasBilingualServices;
         this.hasParking = hasParking;
         this.hasTastingBar = hasTastingBar;
         this.hasBeerColdRoom = hasBeerColdRoom;
         this.hasVintagesCorner = hasVintagesCorner;
-        this.pageNumber = pageNumber;
-    }
-
-    public Integer getPageNumber() {
-        return pageNumber;
-    }
-
-    public void setPageNumber(Integer pageNumber) {
-        this.pageNumber = pageNumber;
     }
 
     public Boolean getHasWheelChairAccessibility() {

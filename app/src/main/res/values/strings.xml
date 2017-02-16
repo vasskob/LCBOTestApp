@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">LCBO Test App</string>
+    <string name="filter">Filter</string>
+    <string name="has_parking">Has parking</string>
+    <string name="has_bilingual_services">Has bilingual services</string>
+    <string name="has_wheelchair_accessability">Has wheelchair accessability</string>
+    <string name="has_testing_bar">Has testing bar</string>
+    <string name="has_beer_cold_room">Has beer cold room</string>
+    <string name="stores_filter">Stores filter</string>
 </resources>

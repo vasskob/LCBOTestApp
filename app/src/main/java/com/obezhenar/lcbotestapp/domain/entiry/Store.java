@@ -3,6 +3,16 @@ package com.obezhenar.lcbotestapp.domain.entiry;
 import com.google.gson.annotations.SerializedName;
 
 public class Store {
+    public static final String HAS_WHEELCHAIR_ACCESSABILITY = "has_wheelchair_accessability";
+    public static final String HAS_BILINGUAL_SERVICES = "has_bilingual_services";
+    public static final String HAS_PRODUCT_CONSULTANT = "has_product_consultant";
+    public static final String HAS_TASTING_BAR = "has_tasting_bar";
+    public static final String HAS_BEER_COLD_ROOM = "has_beer_cold_room";
+    public static final String HAS_SPECIAL_OCCASION_PERMITS = "has_special_occasion_permits";
+    public static final String HAS_VINTAGES_CORNER = "has_vintages_corner";
+    public static final String HAS_PARKING = "has_parking";
+    public static final String HAS_TRANSIT_ACCESS = "has_transit_access";
+
     private long id;
     private String name;
     @SerializedName("address_line_1")

@@ -3,17 +3,25 @@ package com.obezhenar.lcbotestapp.screens.stores.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.obezhenar.lcbotestapp.R;
 import com.obezhenar.lcbotestapp.app.LcboApplication;
 import com.obezhenar.lcbotestapp.screens.stores.model.StoreModel;
+import com.obezhenar.lcbotestapp.screens.stores.model.StoresFilter;
 import com.obezhenar.lcbotestapp.screens.stores.presenter.StoresPresenter;
+import com.obezhenar.lcbotestapp.screens.stores.view.dialog.StoresFilterDialog;
 import com.obezhenar.lcbotestapp.screens.stores.view.list.StoresListAdapter;
 
 import java.util.List;
@@ -26,8 +34,12 @@ import butterknife.ButterKnife;
 public class StoresFragment extends Fragment implements StoresView {
     @BindView(R.id.rv_stores)
     RecyclerView storesRecyclerView;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
     @Inject
     StoresPresenter presenter;
+
+    private StoresFilter storesFilter = new StoresFilter();
 
     private StoresListAdapter adapter;
 
@@ -35,6 +47,7 @@ public class StoresFragment extends Fragment implements StoresView {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LcboApplication.dependencyGraph.initStoresComponent().inject(this);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -52,7 +65,56 @@ public class StoresFragment extends Fragment implements StoresView {
         storesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         storesRecyclerView.setAdapter(adapter);
         presenter.attach(this);
-        presenter.onLoadMore();
+        presenter.loadStores(storesFilter);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_filter, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_filter)
+            showFilterDialog();
+        return true;
+    }
+
+    private void showFilterDialog() {
+        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_filter, null, false);
+        CheckBox hasWheelchairAccessabilityCheckBox = ButterKnife.findById(dialogView, R.id.cb_has_wheelchair_accessability);
+        CheckBox hasParkingCheckBox = ButterKnife.findById(dialogView, R.id.cb_has_parking);
+        CheckBox hasBilingualServicesCheckBox = ButterKnife.findById(dialogView, R.id.cb_has_bilingual_services);
+        CheckBox hasTastingBarCheckBox = ButterKnife.findById(dialogView, R.id.cb_has_tasting_bar);
+        CheckBox hasBeerColdRoomCheckBox = ButterKnife.findById(dialogView, R.id.cb_has_beer_cold_room);
+        CheckBox hasVintagesCornerCheckBox = ButterKnife.findById(dialogView, R.id.cb_has_vintages_corner);
+        hasWheelchairAccessabilityCheckBox.setChecked(storesFilter.getHasWheelChairAccessibility() != null);
+        hasParkingCheckBox.setChecked(storesFilter.getHasParking() != null);
+        hasBilingualServicesCheckBox.setChecked(storesFilter.getHasBilingualServices() != null);
+        hasTastingBarCheckBox.setChecked(storesFilter.getHasTastingBar() != null);
+        hasBeerColdRoomCheckBox.setChecked(storesFilter.getHasBeerColdRoom() != null);
+        hasVintagesCornerCheckBox.setChecked(storesFilter.getHasVintagesCorner() != null);
+        AlertDialog dialog = new AlertDialog.Builder(getContext())
+                .setView(dialogView)
+                .setTitle(R.string.stores_filter)
+                .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+                    storesFilter.setHasWheelChairAccessibility(
+                            hasWheelchairAccessabilityCheckBox.isChecked() ? Boolean.TRUE : null);
+                    storesFilter.setHasParking(
+                            hasParkingCheckBox.isChecked() ? Boolean.TRUE : null);
+                    storesFilter.setHasBilingualServices(
+                            hasBilingualServicesCheckBox.isChecked() ? Boolean.TRUE : null);
+                    storesFilter.setHasTastingBar(
+                            hasTastingBarCheckBox.isChecked() ? Boolean.TRUE : null);
+                    storesFilter.setHasBeerColdRoom(
+                            hasBeerColdRoomCheckBox.isChecked() ? Boolean.TRUE : null);
+                    storesFilter.setHasVintagesCorner(
+                            hasVintagesCornerCheckBox.isChecked() ? Boolean.TRUE : null);
+                    presenter.loadStores(storesFilter);
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .create();
+        dialog.show();
     }
 
     @Override
@@ -69,6 +131,12 @@ public class StoresFragment extends Fragment implements StoresView {
     @Override
     public void showStoreDetails(StoreModel storeModel) {
 
+    }
+
+    @Override
+    public void setShowProgress(boolean showProgress) {
+        storesRecyclerView.setVisibility(showProgress ? View.GONE : View.VISIBLE);
+        progressBar.setVisibility(showProgress ? View.VISIBLE : View.GONE);
     }
 
     @Override

@@ -10,4 +10,6 @@ public interface StoresView {
     void displayError(String message);
 
     void showStoreDetails(StoreModel storeModel);
+
+    void setShowProgress(boolean showProgress);
 }
