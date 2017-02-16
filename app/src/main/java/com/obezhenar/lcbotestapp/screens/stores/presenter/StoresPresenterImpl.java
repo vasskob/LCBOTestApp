@@ -4,29 +4,25 @@ import android.support.annotation.NonNull;
 
 import com.obezhenar.lcbotestapp.domain.Interactor;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
+import com.obezhenar.lcbotestapp.domain.stores.load.model.request.LoadStoresRequestModel;
 import com.obezhenar.lcbotestapp.screens.stores.model.StoreModel;
 import com.obezhenar.lcbotestapp.screens.stores.view.StoresView;
-
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class StoresPresenterImpl implements StoresPresenter {
-    private Interactor<Void, Observable<List<Store>>> loadStoresInteractor;
+    private Interactor<LoadStoresRequestModel, Observable<List<Store>>> loadStoresInteractor;
     private StoresView view;
 
     @Inject
-    public StoresPresenterImpl(Interactor<Void, Observable<List<Store>>> loadStoresInteractor) {
+    public StoresPresenterImpl(Interactor<LoadStoresRequestModel, Observable<List<Store>>> loadStoresInteractor) {
         this.loadStoresInteractor = loadStoresInteractor;
     }
 
@@ -37,7 +33,7 @@ public class StoresPresenterImpl implements StoresPresenter {
 
     @Override
     public void onLoadMore() {
-        loadStoresInteractor.invoke(null)
+        loadStoresInteractor.invoke(new LoadStoresRequestModel())
                 .subscribeOn(Schedulers.newThread())
                 .map(stores -> mapToStoreModel(stores))
                 .observeOn(AndroidSchedulers.mainThread())

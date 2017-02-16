@@ -1,9 +1,13 @@
 package com.obezhenar.lcbotestapp.domain.entiry;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Store {
     private long id;
     private String name;
+    @SerializedName("address_line_1")
     private String address1;
+    @SerializedName("address_line_2")
     private String address2;
     private String city;
 

@@ -17,7 +17,7 @@ public class DependencyGraph {
         this.appContext = appContext;
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(appContext))
-                .apiModule(new ApiModule())
+                .apiModule(new ApiModule(appContext))
                 .storageModule(new StorageModule())
                 .domainModule(new DomainModule())
                 .build();
