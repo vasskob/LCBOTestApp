@@ -17,7 +17,7 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 public interface StoresService {
-    String AUTH_TOKEN = "Authorization : Token " + BuildConfig.LCBO_API_KEY;
+    String AUTH_TOKEN = "Authorization: Token " + BuildConfig.LCBO_API_KEY;
 
     @GET("/stores")
     @Headers(AUTH_TOKEN)

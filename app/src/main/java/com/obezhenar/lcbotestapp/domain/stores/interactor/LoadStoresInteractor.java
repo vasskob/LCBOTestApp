@@ -10,7 +10,7 @@ import com.obezhenar.lcbotestapp.domain.stores.model.request.LoadStoresRequestMo
 import com.obezhenar.lcbotestapp.storage.base.Repository;
 import com.obezhenar.lcbotestapp.storage.base.Specification;
 import com.obezhenar.lcbotestapp.storage.base.StoreSpecificationFactory;
-import com.obezhenar.lcbotestapp.storage.ormlite.specifications.StoreFilterCriteria;
+import com.obezhenar.lcbotestapp.storage.greendao.specification.StoreFilterCriteria;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,7 +19,7 @@ import retrofit2.Response;
 import rx.Observable;
 
 public class LoadStoresInteractor implements Interactor<LoadStoresRequestModel, Observable<List<Store>>> {
-    private final int ITEMS_PER_PAGE = 50;
+    private final int ITEMS_PER_PAGE = 20;
     private StoresService storesService;
     private Repository<Store> storeRepository;
     private StoreSpecificationFactory specificationFactory;
@@ -74,6 +74,8 @@ public class LoadStoresInteractor implements Interactor<LoadStoresRequestModel, 
             whereCondition.append(Store.HAS_TASTING_BAR).append(",");
         if (data.getHasVintagesCorner() != null)
             whereCondition.append(Store.HAS_VINTAGES_CORNER).append(",");
+        if (whereCondition.length() == 0)
+            return null;
         return whereCondition.toString();
     }
 

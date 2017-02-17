@@ -1,6 +1,6 @@
 package com.obezhenar.lcbotestapp.storage.base;
 
-import com.obezhenar.lcbotestapp.storage.ormlite.specifications.StoreFilterCriteria;
+import com.obezhenar.lcbotestapp.storage.greendao.specification.StoreFilterCriteria;
 
 public interface StoreSpecificationFactory {
     /**

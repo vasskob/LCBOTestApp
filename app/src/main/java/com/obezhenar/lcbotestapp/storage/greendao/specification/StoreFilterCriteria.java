@@ -1,4 +1,4 @@
-package com.obezhenar.lcbotestapp.storage.ormlite.specifications;
+package com.obezhenar.lcbotestapp.storage.greendao.specification;
 
 public class StoreFilterCriteria {
     private Boolean hasWheelChairAccessibility;

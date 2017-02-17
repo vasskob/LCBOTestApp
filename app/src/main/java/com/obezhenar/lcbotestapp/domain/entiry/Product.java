@@ -2,320 +2,186 @@ package com.obezhenar.lcbotestapp.domain.entiry;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "products")
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
+
+@Entity
 public class Product {
     @SerializedName("id")
-    @Expose
-    @DatabaseField(id = true)
+    @Expose()
+    @Id
     private long id;
     @SerializedName("is_dead")
     @Expose
-    @DatabaseField
     private boolean isDead;
     @SerializedName("name")
     @Expose
-    @DatabaseField
     private String name;
     @SerializedName("tags")
     @Expose
-    @DatabaseField
     private String tags;
     @SerializedName("is_discontinued")
     @Expose
-    @DatabaseField
     private boolean isDiscontinued;
     @SerializedName("price_in_cents")
     @Expose
-    @DatabaseField
     private long priceInCents;
     @SerializedName("regular_price_in_cents")
     @Expose
-    @DatabaseField
     private long regularPriceInCents;
     @SerializedName("limited_time_offer_savings_in_cents")
     @Expose
-    @DatabaseField
     private long limitedTimeOfferSavingsInCents;
     @SerializedName("limited_time_offer_ends_on")
     @Expose
-    @DatabaseField
     private String limitedTimeOfferEndsOn;
     @SerializedName("bonus_reward_miles")
     @Expose
-    @DatabaseField
     private long bonusRewardMiles;
     @SerializedName("bonus_reward_miles_ends_on")
     @Expose
-    @DatabaseField
     private String bonusRewardMilesEndsOn;
     @SerializedName("stock_type")
     @Expose
-    @DatabaseField
     private String stockType;
     @SerializedName("primary_category")
     @Expose
-    @DatabaseField
     private String primaryCategory;
     @SerializedName("secondary_category")
     @Expose
-    @DatabaseField
     private String secondaryCategory;
     @SerializedName("origin")
     @Expose
-    @DatabaseField
     private String origin;
     @SerializedName("package")
     @Expose
-    @DatabaseField
     private String _package;
     @SerializedName("package_unit_type")
     @Expose
-    @DatabaseField
     private String packageUnitType;
     @SerializedName("package_unit_volume_in_milliliters")
     @Expose
-    @DatabaseField
     private long packageUnitVolumeInMilliliters;
     @SerializedName("total_package_units")
     @Expose
-    @DatabaseField
     private long totalPackageUnits;
     @SerializedName("volume_in_milliliters")
     @Expose
-    @DatabaseField
     private long volumeInMilliliters;
     @SerializedName("alcohol_content")
     @Expose
-    @DatabaseField
     private long alcoholContent;
     @SerializedName("price_per_liter_of_alcohol_in_cents")
     @Expose
-    @DatabaseField
     private long pricePerLiterOfAlcoholInCents;
     @SerializedName("price_per_liter_in_cents")
     @Expose
-    @DatabaseField
     private long pricePerLiterInCents;
     @SerializedName("inventory_count")
     @Expose
-    @DatabaseField
     private long inventoryCount;
     @SerializedName("inventory_volume_in_milliliters")
     @Expose
-    @DatabaseField
     private long inventoryVolumeInMilliliters;
     @SerializedName("inventory_price_in_cents")
     @Expose
-    @DatabaseField
     private long inventoryPriceInCents;
     @SerializedName("sugar_content")
     @Expose
-    @DatabaseField
     private String sugarContent;
     @SerializedName("producer_name")
     @Expose
-    @DatabaseField
     private String producerName;
     @SerializedName("released_on")
     @Expose
-    @DatabaseField
     private String releasedOn;
     @SerializedName("has_value_added_promotion")
     @Expose
-    @DatabaseField
     private boolean hasValueAddedPromotion;
     @SerializedName("has_limited_time_offer")
     @Expose
-    @DatabaseField
     private boolean hasLimitedTimeOffer;
     @SerializedName("has_bonus_reward_miles")
     @Expose
-    @DatabaseField
     private boolean hasBonusRewardMiles;
     @SerializedName("is_seasonal")
     @Expose
-    @DatabaseField
     private boolean isSeasonal;
     @SerializedName("is_vqa")
     @Expose
-    @DatabaseField
     private boolean isVqa;
     @SerializedName("is_ocb")
     @Expose
-    @DatabaseField
     private boolean isOcb;
     @SerializedName("is_kosher")
     @Expose
-    @DatabaseField
     private boolean isKosher;
     @SerializedName("value_added_promotion_description")
     @Expose
-    @DatabaseField
     private String valueAddedPromotionDescription;
     @SerializedName("description")
     @Expose
-    @DatabaseField
     private String description;
     @SerializedName("serving_suggestion")
     @Expose
-    @DatabaseField
     private String servingSuggestion;
     @SerializedName("tasting_note")
     @Expose
-    @DatabaseField
     private String tastingNote;
     @SerializedName("updated_at")
     @Expose
-    @DatabaseField
     private String updatedAt;
     @SerializedName("image_thumb_url")
     @Expose
-    @DatabaseField
     private String imageThumbUrl;
     @SerializedName("image_url")
     @Expose
-    @DatabaseField
     private String imageUrl;
     @SerializedName("varietal")
     @Expose
-    @DatabaseField
     private String varietal;
     @SerializedName("style")
     @Expose
-    @DatabaseField
     private String style;
     @SerializedName("tertiary_category")
     @Expose
-    @DatabaseField
     private String tertiaryCategory;
     @SerializedName("sugar_in_grams_per_liter")
     @Expose
-    @DatabaseField
     private String sugarInGramsPerLiter;
     @SerializedName("clearance_sale_savings_in_cents")
     @Expose
-    @DatabaseField
     private long clearanceSaleSavingsInCents;
     @SerializedName("has_clearance_sale")
     @Expose
-    @DatabaseField
     private boolean hasClearanceSale;
     @SerializedName("product_no")
     @Expose
-    @DatabaseField
     private long productNo;
 
-    /**
-     * No args constructor for use in serialization
-     */
+    @Generated(hash = 1890278724)
     public Product() {
     }
 
-    /**
-     * @param productNo
-     * @param imageUrl
-     * @param bonusRewardMilesEndsOn
-     * @param isOcb
-     * @param bonusRewardMiles
-     * @param hasClearanceSale
-     * @param valueAddedPromotionDescription
-     * @param limitedTimeOfferSavingsInCents
-     * @param volumeInMilliliters
-     * @param packageUnitType
-     * @param description
-     * @param limitedTimeOfferEndsOn
-     * @param primaryCategory
-     * @param _package
-     * @param isDead
-     * @param tertiaryCategory
-     * @param sugarInGramsPerLiter
-     * @param inventoryPriceInCents
-     * @param varietal
-     * @param stockType
-     * @param producerName
-     * @param priceInCents
-     * @param sugarContent
-     * @param servingSuggestion
-     * @param isDiscontinued
-     * @param inventoryCount
-     * @param secondaryCategory
-     * @param imageThumbUrl
-     * @param pricePerLiterInCents
-     * @param packageUnitVolumeInMilliliters
-     * @param id
-     * @param inventoryVolumeInMilliliters
-     * @param hasBonusRewardMiles
-     * @param totalPackageUnits
-     * @param style
-     * @param isKosher
-     * @param name
-     * @param tastingNote
-     * @param tags
-     * @param alcoholContent
-     * @param hasLimitedTimeOffer
-     * @param pricePerLiterOfAlcoholInCents
-     * @param origin
-     * @param releasedOn
-     * @param isSeasonal
-     * @param updatedAt
-     * @param isVqa
-     * @param clearanceSaleSavingsInCents
-     * @param hasValueAddedPromotion
-     * @param regularPriceInCents
-     */
-    public Product(long id,
-                   boolean isDead,
-                   String name,
-                   String tags,
-                   boolean isDiscontinued,
-                   long priceInCents,
-                   long regularPriceInCents,
-                   long limitedTimeOfferSavingsInCents,
-                   String limitedTimeOfferEndsOn,
-                   long bonusRewardMiles,
-                   String bonusRewardMilesEndsOn,
-                   String stockType,
-                   String primaryCategory,
-                   String secondaryCategory,
-                   String origin,
-                   String _package,
-                   String packageUnitType,
-                   long packageUnitVolumeInMilliliters,
-                   long totalPackageUnits,
-                   long volumeInMilliliters,
-                   long alcoholContent,
-                   long pricePerLiterOfAlcoholInCents,
-                   long pricePerLiterInCents,
-                   long inventoryCount,
-                   long inventoryVolumeInMilliliters,
-                   long inventoryPriceInCents,
-                   String sugarContent,
-                   String producerName,
-                   String releasedOn,
-                   boolean hasValueAddedPromotion,
-                   boolean hasLimitedTimeOffer,
-                   boolean hasBonusRewardMiles,
-                   boolean isSeasonal,
-                   boolean isVqa,
-                   boolean isOcb,
-                   boolean isKosher,
-                   String valueAddedPromotionDescription,
-                   String description,
-                   String servingSuggestion,
-                   String tastingNote,
-                   String updatedAt,
-                   String imageThumbUrl,
-                   String imageUrl,
-                   String varietal,
-                   String style,
-                   String tertiaryCategory,
-                   String sugarInGramsPerLiter,
-                   long clearanceSaleSavingsInCents,
-                   boolean hasClearanceSale,
-                   long productNo) {
+    @Generated(hash = 1052147803)
+    public Product(long id, boolean isDead, String name, String tags, boolean isDiscontinued,
+                   long priceInCents, long regularPriceInCents, long limitedTimeOfferSavingsInCents,
+                   String limitedTimeOfferEndsOn, long bonusRewardMiles,
+                   String bonusRewardMilesEndsOn, String stockType, String primaryCategory,
+                   String secondaryCategory, String origin, String _package, String packageUnitType,
+                   long packageUnitVolumeInMilliliters, long totalPackageUnits,
+                   long volumeInMilliliters, long alcoholContent, long pricePerLiterOfAlcoholInCents,
+                   long pricePerLiterInCents, long inventoryCount, long inventoryVolumeInMilliliters,
+                   long inventoryPriceInCents, String sugarContent, String producerName,
+                   String releasedOn, boolean hasValueAddedPromotion, boolean hasLimitedTimeOffer,
+                   boolean hasBonusRewardMiles, boolean isSeasonal, boolean isVqa, boolean isOcb,
+                   boolean isKosher, String valueAddedPromotionDescription, String description,
+                   String servingSuggestion, String tastingNote, String updatedAt,
+                   String imageThumbUrl, String imageUrl, String varietal, String style,
+                   String tertiaryCategory, String sugarInGramsPerLiter,
+                   long clearanceSaleSavingsInCents, boolean hasClearanceSale, long productNo) {
         this.id = id;
         this.isDead = isDead;
         this.name = name;
@@ -766,6 +632,54 @@ public class Product {
 
     public void setProductNo(long productNo) {
         this.productNo = productNo;
+    }
+
+    public boolean getIsDead() {
+        return this.isDead;
+    }
+
+    public boolean getIsDiscontinued() {
+        return this.isDiscontinued;
+    }
+
+    public String get_package() {
+        return this._package;
+    }
+
+    public void set_package(String _package) {
+        this._package = _package;
+    }
+
+    public boolean getHasValueAddedPromotion() {
+        return this.hasValueAddedPromotion;
+    }
+
+    public boolean getHasLimitedTimeOffer() {
+        return this.hasLimitedTimeOffer;
+    }
+
+    public boolean getHasBonusRewardMiles() {
+        return this.hasBonusRewardMiles;
+    }
+
+    public boolean getIsSeasonal() {
+        return this.isSeasonal;
+    }
+
+    public boolean getIsVqa() {
+        return this.isVqa;
+    }
+
+    public boolean getIsOcb() {
+        return this.isOcb;
+    }
+
+    public boolean getIsKosher() {
+        return this.isKosher;
+    }
+
+    public boolean getHasClearanceSale() {
+        return this.hasClearanceSale;
     }
 
 }

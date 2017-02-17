@@ -1,11 +1,12 @@
 package com.obezhenar.lcbotestapp.domain.entiry;
 
 import com.google.gson.annotations.SerializedName;
-import com.j256.ormlite.field.DataType;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "stores")
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
+
+@Entity
 public class Store {
     public static final String HAS_WHEELCHAIR_ACCESSABILITY = "has_wheelchair_accessability";
     public static final String HAS_BILINGUAL_SERVICES = "has_bilingual_services";
@@ -14,41 +15,28 @@ public class Store {
     public static final String HAS_VINTAGES_CORNER = "has_vintages_corner";
     public static final String HAS_PARKING = "has_parking";
 
-    @DatabaseField(id = true)
+    @Id
     private long id;
-    @DatabaseField()
     private String name;
     @SerializedName("address_line_1")
-    @DatabaseField()
     private String address1;
     @SerializedName("address_line_2")
-    @DatabaseField()
     private String address2;
-    @DatabaseField()
     private String city;
-    @DatabaseField()
     private String telephone;
-    @DatabaseField()
     private double latitude;
-    @DatabaseField()
     private double longitude;
     @SerializedName("has_wheelchair_accessability")
-    @DatabaseField(dataType = DataType.BOOLEAN)
     private boolean hasWheelchairAccessability;
     @SerializedName("has_bilingual_services")
-    @DatabaseField(dataType = DataType.BOOLEAN)
     private boolean hasBilingualServices;
     @SerializedName("has_tasting_bar")
-    @DatabaseField(dataType = DataType.BOOLEAN)
     private boolean hasTastingBar;
     @SerializedName("has_beer_cold_room")
-    @DatabaseField(dataType = DataType.BOOLEAN)
     private boolean hasBeerColdRoom;
     @SerializedName("has_vintages_corner")
-    @DatabaseField(dataType = DataType.BOOLEAN)
     private boolean hasVintagesCorner;
     @SerializedName("has_parking")
-    @DatabaseField(dataType = DataType.BOOLEAN)
     private boolean hasParking;
 
     public Store(long id, String name, String address1, String address2, String city) {
@@ -59,22 +47,15 @@ public class Store {
         this.city = city;
     }
 
+    @Generated(hash = 770513066)
     public Store() {
     }
 
-    public Store(long id,
-                 String name,
-                 String address1,
-                 String address2,
-                 String city,
-                 String telephone,
-                 double latitude,
-                 double longitude,
-                 boolean hasWheelchairAccessability,
-                 boolean hasBilingualServices,
-                 boolean hasTastingBar,
-                 boolean hasBeerColdRoom,
-                 boolean hasVintagesCorner,
+    @Generated(hash = 774216441)
+    public Store(long id, String name, String address1, String address2, String city,
+                 String telephone, double latitude, double longitude,
+                 boolean hasWheelchairAccessability, boolean hasBilingualServices,
+                 boolean hasTastingBar, boolean hasBeerColdRoom, boolean hasVintagesCorner,
                  boolean hasParking) {
         this.id = id;
         this.name = name;
@@ -130,5 +111,77 @@ public class Store {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getTelephone() {
+        return this.telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public double getLatitude() {
+        return this.latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return this.longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public boolean getHasWheelchairAccessability() {
+        return this.hasWheelchairAccessability;
+    }
+
+    public void setHasWheelchairAccessability(boolean hasWheelchairAccessability) {
+        this.hasWheelchairAccessability = hasWheelchairAccessability;
+    }
+
+    public boolean getHasBilingualServices() {
+        return this.hasBilingualServices;
+    }
+
+    public void setHasBilingualServices(boolean hasBilingualServices) {
+        this.hasBilingualServices = hasBilingualServices;
+    }
+
+    public boolean getHasTastingBar() {
+        return this.hasTastingBar;
+    }
+
+    public void setHasTastingBar(boolean hasTastingBar) {
+        this.hasTastingBar = hasTastingBar;
+    }
+
+    public boolean getHasBeerColdRoom() {
+        return this.hasBeerColdRoom;
+    }
+
+    public void setHasBeerColdRoom(boolean hasBeerColdRoom) {
+        this.hasBeerColdRoom = hasBeerColdRoom;
+    }
+
+    public boolean getHasVintagesCorner() {
+        return this.hasVintagesCorner;
+    }
+
+    public void setHasVintagesCorner(boolean hasVintagesCorner) {
+        this.hasVintagesCorner = hasVintagesCorner;
+    }
+
+    public boolean getHasParking() {
+        return this.hasParking;
+    }
+
+    public void setHasParking(boolean hasParking) {
+        this.hasParking = hasParking;
     }
 }
