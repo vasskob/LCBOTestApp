@@ -48,4 +48,5 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.github.markomilos:paginate:0.5.1'
+    compile group: 'com.j256.ormlite', name: 'ormlite-android', version: '5.0'
 }

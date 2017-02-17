@@ -12,7 +12,7 @@ public class StoresLoadingListItemCreator implements LoadingListItemCreator {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new StoreLoadingItemViewLolder(LayoutInflater.from(parent.getContext())
+        return new StoreLoadingItemViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_loading, parent, false));
     }
 
@@ -21,9 +21,9 @@ public class StoresLoadingListItemCreator implements LoadingListItemCreator {
 
     }
 
-    class StoreLoadingItemViewLolder extends RecyclerView.ViewHolder {
+    class StoreLoadingItemViewHolder extends RecyclerView.ViewHolder {
 
-        public StoreLoadingItemViewLolder(View itemView) {
+        public StoreLoadingItemViewHolder(View itemView) {
             super(itemView);
         }
     }

@@ -42,6 +42,7 @@ public class StoresPresenterImpl implements StoresPresenter {
     @Override
     public void loadStores(StoresFilter filter) {
         view.clearList();
+        loadStoresRequestModel.setPageNumber(1);
         loadStoresRequestModel.setHasBeerColdRoom(filter.getHasBeerColdRoom());
         loadStoresRequestModel.setHasBilingualServices(filter.getHasBilingualServices());
         loadStoresRequestModel.setHasParking(filter.getHasParking());
@@ -62,7 +63,10 @@ public class StoresPresenterImpl implements StoresPresenter {
                             view.setShowProgress(false);
                             view.displayStores(stores);
                         },
-                        throwable -> view.displayError(throwable.getMessage())
+                        throwable -> {
+                            throwable.printStackTrace();
+                            view.displayError(throwable.getMessage());
+                        }
 
                 );
     }

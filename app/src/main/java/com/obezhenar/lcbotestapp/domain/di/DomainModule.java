@@ -8,6 +8,8 @@ import com.obezhenar.lcbotestapp.domain.Interactor;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
 import com.obezhenar.lcbotestapp.domain.stores.load.interactor.LoadStoresInteractor;
 import com.obezhenar.lcbotestapp.domain.stores.load.model.request.LoadStoresRequestModel;
+import com.obezhenar.lcbotestapp.storage.base.Repository;
+import com.obezhenar.lcbotestapp.storage.base.StoreSpecificationFactory;
 
 import java.util.List;
 
@@ -25,7 +27,13 @@ public class DomainModule {
     @Singleton
     public Interactor<LoadStoresRequestModel, Observable<List<Store>>> provideLoadStoresInteractor(
             StoresService storesService,
-            Context context) {
-        return new LoadStoresInteractor(storesService, context.getString(R.string.lcbo_api_key));
+            Repository<Store> storeRepository,
+            Context context,
+            StoreSpecificationFactory specificationFactory) {
+        return new LoadStoresInteractor(
+                storesService,
+                context.getString(R.string.lcbo_api_key),
+                storeRepository,
+                specificationFactory);
     }
 }

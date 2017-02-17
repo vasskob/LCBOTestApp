@@ -29,6 +29,7 @@ public class StoresListAdapter extends RecyclerView.Adapter<StoresItemViewHolder
 
     public void clearData() {
         data.clear();
+        notifyDataSetChanged();
     }
 
     @Override

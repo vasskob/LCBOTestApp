@@ -1,4 +1,4 @@
-package com.obezhenar.lcbotestapp.api;
+package com.obezhenar.lcbotestapp.api.di;
 
 import android.content.Context;
 

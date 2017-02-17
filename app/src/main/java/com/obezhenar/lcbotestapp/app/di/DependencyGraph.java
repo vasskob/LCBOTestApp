@@ -2,11 +2,11 @@ package com.obezhenar.lcbotestapp.app.di;
 
 import android.content.Context;
 
-import com.obezhenar.lcbotestapp.api.ApiModule;
+import com.obezhenar.lcbotestapp.api.di.ApiModule;
 import com.obezhenar.lcbotestapp.domain.di.DomainModule;
 import com.obezhenar.lcbotestapp.screens.stores.di.StoresComponent;
 import com.obezhenar.lcbotestapp.screens.stores.di.StoresModule;
-import com.obezhenar.lcbotestapp.storage.StorageModule;
+import com.obezhenar.lcbotestapp.storage.di.StorageModule;
 
 public class DependencyGraph {
     private Context appContext;
@@ -18,7 +18,7 @@ public class DependencyGraph {
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(appContext))
                 .apiModule(new ApiModule(appContext))
-                .storageModule(new StorageModule())
+                .storageModule(new StorageModule(appContext))
                 .domainModule(new DomainModule())
                 .build();
     }

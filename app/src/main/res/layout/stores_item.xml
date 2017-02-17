@@ -19,6 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="64dp"
         android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:lines="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="16sp"
         tools:text="Store Name"/>
@@ -27,8 +29,8 @@
         android:id="@+id/tv_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginLeft="64dp"
+        android:layout_marginTop="24dp"
         tools:text="Some Long addressSome Long addressSome Long addressSome Long addressSome Long addressSome Long addressSome Long addressSome Long address"/>
 
 </FrameLayout>

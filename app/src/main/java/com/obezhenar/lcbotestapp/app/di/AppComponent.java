@@ -1,10 +1,10 @@
 package com.obezhenar.lcbotestapp.app.di;
 
-import com.obezhenar.lcbotestapp.api.ApiModule;
+import com.obezhenar.lcbotestapp.api.di.ApiModule;
 import com.obezhenar.lcbotestapp.domain.di.DomainModule;
 import com.obezhenar.lcbotestapp.screens.stores.di.StoresComponent;
 import com.obezhenar.lcbotestapp.screens.stores.di.StoresModule;
-import com.obezhenar.lcbotestapp.storage.StorageModule;
+import com.obezhenar.lcbotestapp.storage.di.StorageModule;
 
 import javax.inject.Singleton;
 

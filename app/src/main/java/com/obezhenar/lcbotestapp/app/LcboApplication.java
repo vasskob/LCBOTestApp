@@ -12,4 +12,9 @@ public class LcboApplication extends Application {
         super.onCreate();
         dependencyGraph = new DependencyGraph(this);
     }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+    }
 }
