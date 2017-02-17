@@ -7,4 +7,8 @@
     <string name="has_testing_bar">Has testing bar</string>
     <string name="has_beer_cold_room">Has beer cold room</string>
     <string name="stores_filter">Stores filter</string>
+    <string name="stores">Stores</string>
+    <string name="products">Products</string>
+    <string name="search_by_products">Search by products</string>
+    <string name="about">About</string>
 </resources>

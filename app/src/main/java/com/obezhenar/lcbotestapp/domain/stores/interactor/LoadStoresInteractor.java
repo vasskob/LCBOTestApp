@@ -1,46 +1,66 @@
-package com.obezhenar.lcbotestapp.domain.stores.load.interactor;
+package com.obezhenar.lcbotestapp.domain.stores.interactor;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.widget.GridLayout;
 
 import com.obezhenar.lcbotestapp.api.stores.StoresService;
 import com.obezhenar.lcbotestapp.domain.Interactor;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
 import com.obezhenar.lcbotestapp.domain.entiry.StoresResponse;
-import com.obezhenar.lcbotestapp.domain.stores.load.model.request.LoadStoresRequestModel;
+import com.obezhenar.lcbotestapp.domain.stores.model.request.LoadStoresRequestModel;
 import com.obezhenar.lcbotestapp.storage.base.Repository;
 import com.obezhenar.lcbotestapp.storage.base.Specification;
 import com.obezhenar.lcbotestapp.storage.base.StoreSpecificationFactory;
+import com.obezhenar.lcbotestapp.storage.ormlite.specifications.StoreFilterCriteria;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
-import javax.inject.Inject;
-
+import retrofit2.Response;
 import rx.Observable;
 
 public class LoadStoresInteractor implements Interactor<LoadStoresRequestModel, Observable<List<Store>>> {
-    private final int ITEMS_PERPAGE = 50;
+    private final int ITEMS_PER_PAGE = 50;
     private StoresService storesService;
-    private String apiKey;
     private Repository<Store> storeRepository;
     private StoreSpecificationFactory specificationFactory;
 
     public LoadStoresInteractor(
             StoresService storesService,
-            String apiKey,
             Repository<Store> storeRepository,
             StoreSpecificationFactory specificationFactory) {
         this.storesService = storesService;
-        this.apiKey = apiKey;
         this.storeRepository = storeRepository;
         this.specificationFactory = specificationFactory;
     }
 
     @Override
     public Observable<List<Store>> invoke(@NonNull LoadStoresRequestModel data) {
-        // TODO: 16.02.2017 excluding filtering
+        return Observable.create(subscriber -> {
+            // retrieving data from api
+            List<Store> stores = fetchStoresFromApi(data);
+            // caching
+            if (stores != null)
+                storeRepository.addAll(stores);
+            // fetching data from local storage
+            subscriber.onNext(storeRepository.query(createQueryByPage(data)));
+        });
+    }
+
+    private List<Store> fetchStoresFromApi(@NonNull LoadStoresRequestModel data) {
+        try {
+            Response<StoresResponse> response = storesService.loadStores(
+                    prepareWhereCondition(data),
+                    data.getPageNumber()
+            ).execute();
+            if (response.isSuccessful())
+                return response.body().getStores();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private String prepareWhereCondition(LoadStoresRequestModel data) {
         final StringBuilder whereCondition = new StringBuilder();
         if (data.getHasWheelChairAccessibility() != null)
             whereCondition.append(Store.HAS_WHEELCHAIR_ACCESSABILITY).append(",");
@@ -54,22 +74,20 @@ public class LoadStoresInteractor implements Interactor<LoadStoresRequestModel, 
             whereCondition.append(Store.HAS_TASTING_BAR).append(",");
         if (data.getHasVintagesCorner() != null)
             whereCondition.append(Store.HAS_VINTAGES_CORNER).append(",");
-        return storesService.loadStores(
-                "Token " + apiKey,
-                whereCondition.toString(),
-                data.getPageNumber()
-        ).map(StoresResponse::getStores)
-                .flatMap(stores -> Observable.create(subscriber -> {
-                    storeRepository.addAll(stores);
-                    subscriber.onNext(storeRepository.query(createQueryByPage(data.getPageNumber())));
-                }));
-
+        return whereCondition.toString();
     }
 
-    private Specification createQueryByPage(int fromPage) {
-        final long startIndex = fromPage * ITEMS_PERPAGE;
-        return specificationFactory.CreatePaginationSpecification(
-                startIndex, startIndex + ITEMS_PERPAGE
-        );
+    private Specification createQueryByPage(LoadStoresRequestModel data) {
+        final long startIndex = (data.getPageNumber() - 1) * ITEMS_PER_PAGE;
+        return specificationFactory.createPaginationSpecification(
+                new StoreFilterCriteria(
+                        data.getHasWheelChairAccessibility(),
+                        data.getHasBilingualServices(),
+                        data.getHasParking(),
+                        data.getHasTastingBar(),
+                        data.getHasBeerColdRoom(),
+                        data.getHasVintagesCorner(),
+                        startIndex,
+                        startIndex + ITEMS_PER_PAGE));
     }
 }

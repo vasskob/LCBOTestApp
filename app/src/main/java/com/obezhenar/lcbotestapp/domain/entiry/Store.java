@@ -1,6 +1,7 @@
 package com.obezhenar.lcbotestapp.domain.entiry;
 
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -32,22 +33,22 @@ public class Store {
     @DatabaseField()
     private double longitude;
     @SerializedName("has_wheelchair_accessability")
-    @DatabaseField()
+    @DatabaseField(dataType = DataType.BOOLEAN)
     private boolean hasWheelchairAccessability;
     @SerializedName("has_bilingual_services")
-    @DatabaseField()
+    @DatabaseField(dataType = DataType.BOOLEAN)
     private boolean hasBilingualServices;
     @SerializedName("has_tasting_bar")
-    @DatabaseField()
+    @DatabaseField(dataType = DataType.BOOLEAN)
     private boolean hasTastingBar;
     @SerializedName("has_beer_cold_room")
-    @DatabaseField()
+    @DatabaseField(dataType = DataType.BOOLEAN)
     private boolean hasBeerColdRoom;
     @SerializedName("has_vintages_corner")
-    @DatabaseField()
+    @DatabaseField(dataType = DataType.BOOLEAN)
     private boolean hasVintagesCorner;
     @SerializedName("has_parking")
-    @DatabaseField()
+    @DatabaseField(dataType = DataType.BOOLEAN)
     private boolean hasParking;
 
     public Store(long id, String name, String address1, String address2, String city) {

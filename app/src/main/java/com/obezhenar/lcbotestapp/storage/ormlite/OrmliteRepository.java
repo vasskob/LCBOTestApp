@@ -21,7 +21,7 @@ public class OrmliteRepository<T> implements Repository<T> {
     @Override
     public void add(T item) {
         try {
-            dao.create(item);
+            dao.createOrUpdate(item);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -30,7 +30,7 @@ public class OrmliteRepository<T> implements Repository<T> {
     @Override
     public void addAll(List<T> items) {
         try {
-            dao.create(items);
+            dao.createOrUpdate(items);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -59,7 +59,7 @@ public class OrmliteRepository<T> implements Repository<T> {
         if (specification != null)
             try {
                 PreparedQuery query = ((OrmLiteSpecification<T>) specification).prepareQuery();
-                dao.query(query);
+                return dao.query(query);
             } catch (ClassCastException e) {
                 throw new RuntimeException("Incorrect query specification type. Please use OrmLiteSpecification with <T> generic type");
             } catch (SQLException e) {

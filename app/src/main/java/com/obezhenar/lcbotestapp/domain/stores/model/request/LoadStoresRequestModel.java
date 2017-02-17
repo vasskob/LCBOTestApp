@@ -1,4 +1,4 @@
-package com.obezhenar.lcbotestapp.domain.stores.load.model.request;
+package com.obezhenar.lcbotestapp.domain.stores.model.request;
 
 public class LoadStoresRequestModel {
     private Boolean hasWheelChairAccessibility;

@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.obezhenar.lcbotestapp.domain.Interactor;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
-import com.obezhenar.lcbotestapp.domain.stores.load.model.request.LoadStoresRequestModel;
+import com.obezhenar.lcbotestapp.domain.stores.model.request.LoadStoresRequestModel;
 import com.obezhenar.lcbotestapp.screens.stores.model.StoreModel;
 import com.obezhenar.lcbotestapp.screens.stores.model.StoresFilter;
 import com.obezhenar.lcbotestapp.screens.stores.view.StoresView;

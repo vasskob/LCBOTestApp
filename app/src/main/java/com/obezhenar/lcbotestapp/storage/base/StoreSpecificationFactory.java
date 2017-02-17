@@ -1,11 +1,14 @@
 package com.obezhenar.lcbotestapp.storage.base;
 
+import com.obezhenar.lcbotestapp.storage.ormlite.specifications.StoreFilterCriteria;
+
 public interface StoreSpecificationFactory {
     /**
      * Query by pages
-     * @param fromNumber
-     * @param toNumber
+     *
      * @return
      */
-    Specification CreatePaginationSpecification(long fromNumber, long toNumber);
+    Specification createPaginationSpecification(StoreFilterCriteria criteria);
+
+    public Specification createStoreByIdSpecification(long storeId);
 }
