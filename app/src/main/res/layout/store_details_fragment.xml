@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Make Call"/>
+        android:text="@string/make_call"/>
 
     <Button
         android:id="@+id/btn_show_products"
@@ -44,6 +44,6 @@
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:text="Make Call"/>
+        android:text="@string/show_products"/>
 
 </LinearLayout>

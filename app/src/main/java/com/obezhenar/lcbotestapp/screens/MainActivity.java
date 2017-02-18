@@ -3,7 +3,6 @@ package com.obezhenar.lcbotestapp.screens;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.design.widget.NavigationView;
-import android.support.v4.graphics.ColorUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +12,7 @@ import android.view.MenuItem;
 
 import com.obezhenar.lcbotestapp.R;
 import com.obezhenar.lcbotestapp.screens.eventbus.ShowStoreDetailsEvent;
+import com.obezhenar.lcbotestapp.screens.eventbus.ShowStoreProductsEvent;
 import com.obezhenar.lcbotestapp.screens.store_details.view.StoreDetailsFragment;
 import com.obezhenar.lcbotestapp.screens.stores.view.StoresFragment;
 
@@ -74,6 +74,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, StoreDetailsFragment.newInstance(event.getStoreId()))
                 .commit();
+    }
+
+    @Subscribe
+    public void onShowStoreProductsEvent(ShowStoreProductsEvent event) {
+
     }
 
     @Override

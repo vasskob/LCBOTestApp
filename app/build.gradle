@@ -16,12 +16,14 @@ android {
     buildTypes {
         debug {
             resValue("string", "lcbo_api_key", "MDoxZTlhNDkwMi1mM2FjLTExZTYtYWYwNi0wYmFlYTdiMTUyNjY6MjNxY24zdklFV2lhME5NVzZhYnNydWg4MXpsVlBUVk5OM2VY")
+            resValue("string", "google_map_api_key", "AIzaSyAmgQD07CUvcG65Bi8gwWj2bCgDt5_A5fg")
             resValue("string", "api_url", "https://lcboapi.com")
             buildConfigField('java.lang.String', 'LCBO_API_KEY', '"MDoxZTlhNDkwMi1mM2FjLTExZTYtYWYwNi0wYmFlYTdiMTUyNjY6MjNxY24zdklFV2lhME5NVzZhYnNydWg4MXpsVlBUVk5OM2VY"')
         }
         release {
             resValue("string", "lcbo_api_key", "MDoxZTlhNDkwMi1mM2FjLTExZTYtYWYwNi0wYmFlYTdiMTUyNjY6MjNxY24zdklFV2lhME5NVzZhYnNydWg4MXpsVlBUVk5OM2VY")
             resValue("string", "api_url", "https://lcboapi.com")
+            resValue("string", "google_map_api_key", "AIzaSyAmgQD07CUvcG65Bi8gwWj2bCgDt5_A5fg")
             buildConfigField('java.lang.String', 'LCBO_API_KEY', '"MDoxZTlhNDkwMi1mM2FjLTExZTYtYWYwNi0wYmFlYTdiMTUyNjY6MjNxY24zdklFV2lhME5NVzZhYnNydWg4MXpsVlBUVk5OM2VY"')
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

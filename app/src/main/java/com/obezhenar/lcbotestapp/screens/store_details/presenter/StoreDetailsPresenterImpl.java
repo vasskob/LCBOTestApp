@@ -3,9 +3,12 @@ package com.obezhenar.lcbotestapp.screens.store_details.presenter;
 import com.obezhenar.lcbotestapp.common.util.Mapper;
 import com.obezhenar.lcbotestapp.domain.Interactor;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
+import com.obezhenar.lcbotestapp.screens.eventbus.ShowStoreProductsEvent;
 import com.obezhenar.lcbotestapp.screens.store_details.model.StoreDetailsViewModel;
 import com.obezhenar.lcbotestapp.screens.store_details.view.StoreDetailsView;
 import com.obezhenar.lcbotestapp.screens.stores.presenter.StoresPresenterImpl;
+
+import org.greenrobot.eventbus.EventBus;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -56,10 +59,6 @@ public class StoreDetailsPresenterImpl extends Subscriber<StoreDetailsViewModel>
         view.displayStoreDetails(model);
     }
 
-    @Override
-    public void makeCall() {
-
-    }
 
     @Override
     public void onShowProductsClick() {

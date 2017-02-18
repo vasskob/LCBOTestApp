@@ -8,7 +8,5 @@ public interface StoreDetailsPresenter {
 
     void loadStore(long id);
 
-    void makeCall();
-
     void onShowProductsClick();
 }

@@ -25,6 +25,7 @@ public class StoreDetailsViewModelMapper implements Mapper<Store, StoreDetailsVi
         model.setLongitude(data.getLongitude());
         model.setPhone(data.getTelephone());
         model.setTitle(data.getName());
+        model.setAddress(data.getCity() + ", " + data.getAddress1());
         model.setFeatures(obtainFeatures(data));
         return model;
     }

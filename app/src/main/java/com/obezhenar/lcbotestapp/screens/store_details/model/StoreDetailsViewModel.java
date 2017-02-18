@@ -9,6 +9,7 @@ public class StoreDetailsViewModel {
     private List<String> features;
     private String phone;
     private String title;
+    private String address;
 
     public StoreDetailsViewModel() {
     }
@@ -59,5 +60,13 @@ public class StoreDetailsViewModel {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
