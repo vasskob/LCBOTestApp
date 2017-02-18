@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.obezhenar.lcbotestapp.api.di.ApiModule;
 import com.obezhenar.lcbotestapp.domain.di.DomainModule;
+import com.obezhenar.lcbotestapp.screens.store_details.di.StoreDetailsComponent;
+import com.obezhenar.lcbotestapp.screens.store_details.di.StoreDetailsModule;
 import com.obezhenar.lcbotestapp.screens.stores.di.StoresComponent;
 import com.obezhenar.lcbotestapp.screens.stores.di.StoresModule;
 import com.obezhenar.lcbotestapp.storage.di.StorageModule;
@@ -12,6 +14,7 @@ public class DependencyGraph {
     private Context appContext;
     private AppComponent appComponent;
     private StoresComponent storesComponent;
+    private StoreDetailsComponent storeDetailsComponent;
 
     public DependencyGraph(Context appContext) {
         this.appContext = appContext;
@@ -30,5 +33,15 @@ public class DependencyGraph {
 
     public void releaseStoresComponent() {
         storesComponent = null;
+    }
+
+    public StoreDetailsComponent initStoreDetailsComponent() {
+        if (storeDetailsComponent == null)
+            storeDetailsComponent = appComponent.plusStoreDetailsComponent(new StoreDetailsModule());
+        return storeDetailsComponent;
+    }
+
+    public void releaseStoreDetailsComponent() {
+        storeDetailsComponent = null;
     }
 }

@@ -12,7 +12,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.obezhenar.lcbotestapp.R;
+import com.obezhenar.lcbotestapp.screens.eventbus.ShowStoreDetailsEvent;
+import com.obezhenar.lcbotestapp.screens.store_details.view.StoreDetailsFragment;
 import com.obezhenar.lcbotestapp.screens.stores.view.StoresFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         setSupportActionBar(toolbar);
         initNavigation();
         getSupportFragmentManager().beginTransaction()
@@ -61,5 +67,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
         return true;
+    }
+
+    @Subscribe
+    public void onShowStoreDetailsEvent(ShowStoreDetailsEvent event) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content, StoreDetailsFragment.newInstance(event.getStoreId()))
+                .commit();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

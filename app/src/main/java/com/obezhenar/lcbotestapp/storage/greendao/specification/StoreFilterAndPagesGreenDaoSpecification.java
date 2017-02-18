@@ -2,6 +2,7 @@ package com.obezhenar.lcbotestapp.storage.greendao.specification;
 
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
 import com.obezhenar.lcbotestapp.domain.entiry.StoreDao;
+
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.query.Query;
 import org.greenrobot.greendao.query.QueryBuilder;
@@ -36,6 +37,7 @@ public class StoreFilterAndPagesGreenDaoSpecification implements GreenDaoSpecifi
         if (criteria.getHasWheelChairAccessibility() != null) {
             queryBuilder.where(StoreDao.Properties.HasWheelchairAccessability.eq(true));
         }
+        queryBuilder.offset((int) criteria.getFrom()).limit((int) criteria.getTo());
         return queryBuilder.build();
     }
 }

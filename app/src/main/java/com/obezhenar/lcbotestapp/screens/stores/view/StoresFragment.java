@@ -18,12 +18,15 @@ import android.widget.Toast;
 
 import com.obezhenar.lcbotestapp.R;
 import com.obezhenar.lcbotestapp.app.LcboApplication;
+import com.obezhenar.lcbotestapp.screens.eventbus.ShowStoreDetailsEvent;
 import com.obezhenar.lcbotestapp.screens.stores.model.StoreModel;
 import com.obezhenar.lcbotestapp.screens.stores.model.StoresFilter;
 import com.obezhenar.lcbotestapp.screens.stores.presenter.StoresPresenter;
 import com.obezhenar.lcbotestapp.screens.stores.view.list.StoresListAdapter;
 import com.obezhenar.lcbotestapp.screens.stores.view.list.StoresLoadingListItemCreator;
 import com.paginate.Paginate;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -160,7 +163,7 @@ public class StoresFragment extends Fragment implements StoresView {
 
     @Override
     public void showStoreDetails(StoreModel storeModel) {
-
+        EventBus.getDefault().post(new ShowStoreDetailsEvent(storeModel.getId()));
     }
 
     @Override

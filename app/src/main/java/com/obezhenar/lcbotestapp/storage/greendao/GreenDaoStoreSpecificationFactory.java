@@ -3,6 +3,7 @@ package com.obezhenar.lcbotestapp.storage.greendao;
 import com.obezhenar.lcbotestapp.domain.entiry.StoreDao;
 import com.obezhenar.lcbotestapp.storage.base.Specification;
 import com.obezhenar.lcbotestapp.storage.base.StoreSpecificationFactory;
+import com.obezhenar.lcbotestapp.storage.greendao.specification.StoreByIdGreenDaoSpecification;
 import com.obezhenar.lcbotestapp.storage.greendao.specification.StoreFilterAndPagesGreenDaoSpecification;
 import com.obezhenar.lcbotestapp.storage.greendao.specification.StoreFilterCriteria;
 
@@ -20,6 +21,6 @@ public class GreenDaoStoreSpecificationFactory implements StoreSpecificationFact
 
     @Override
     public Specification createStoreByIdSpecification(long storeId) {
-        return null;
+        return new StoreByIdGreenDaoSpecification(storeId, storeDao);
     }
 }

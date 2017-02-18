@@ -30,7 +30,7 @@ public class StoresPresenterImpl implements StoresPresenter {
 
     @Override
     public void onStoreClick(StoreModel store) {
-
+        view.showStoreDetails(store);
     }
 
     @Override
