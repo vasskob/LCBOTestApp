@@ -1,4 +1,4 @@
-package com.obezhenar.lcbotestapp.screens.stores.view.list;
+package com.obezhenar.lcbotestapp.screens.common;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import com.obezhenar.lcbotestapp.R;
 import com.paginate.recycler.LoadingListItemCreator;
 
-public class StoresLoadingListItemCreator implements LoadingListItemCreator {
+public class LoadingListItemCreatorImpl implements LoadingListItemCreator {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

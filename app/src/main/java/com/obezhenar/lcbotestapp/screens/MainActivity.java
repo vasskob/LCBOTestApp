@@ -11,8 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.obezhenar.lcbotestapp.R;
+import com.obezhenar.lcbotestapp.screens.eventbus.ShowProductDetailsEvent;
 import com.obezhenar.lcbotestapp.screens.eventbus.ShowStoreDetailsEvent;
 import com.obezhenar.lcbotestapp.screens.eventbus.ShowStoreProductsEvent;
+import com.obezhenar.lcbotestapp.screens.products.view.ProductsFragment;
 import com.obezhenar.lcbotestapp.screens.store_details.view.StoreDetailsFragment;
 import com.obezhenar.lcbotestapp.screens.stores.view.StoresFragment;
 
@@ -78,6 +80,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Subscribe
     public void onShowStoreProductsEvent(ShowStoreProductsEvent event) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content, ProductsFragment.newInstance(event.getStoreId()))
+                .commit();
+    }
+
+    @Subscribe
+    public void onShowProductDetailEvent(ShowProductDetailsEvent event) {
 
     }
 

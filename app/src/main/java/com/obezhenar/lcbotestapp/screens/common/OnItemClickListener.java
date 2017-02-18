@@ -1,4 +1,4 @@
-package com.obezhenar.lcbotestapp.screens.base;
+package com.obezhenar.lcbotestapp.screens.common;
 
 import android.view.View;
 

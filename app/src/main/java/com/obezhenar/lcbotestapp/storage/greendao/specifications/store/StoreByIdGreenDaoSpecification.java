@@ -1,7 +1,8 @@
-package com.obezhenar.lcbotestapp.storage.greendao.specification;
+package com.obezhenar.lcbotestapp.storage.greendao.specifications.store;
 
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
 import com.obezhenar.lcbotestapp.domain.entiry.StoreDao;
+import com.obezhenar.lcbotestapp.storage.greendao.specifications.GreenDaoSpecification;
 
 import org.greenrobot.greendao.query.Query;
 

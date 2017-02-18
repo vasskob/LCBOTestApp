@@ -1,16 +1,16 @@
-package com.obezhenar.lcbotestapp.storage.greendao;
+package com.obezhenar.lcbotestapp.storage.greendao.specification_factory;
 
 import com.obezhenar.lcbotestapp.domain.entiry.StoreDao;
 import com.obezhenar.lcbotestapp.storage.base.Specification;
 import com.obezhenar.lcbotestapp.storage.base.StoreSpecificationFactory;
-import com.obezhenar.lcbotestapp.storage.greendao.specification.StoreByIdGreenDaoSpecification;
-import com.obezhenar.lcbotestapp.storage.greendao.specification.StoreFilterAndPagesGreenDaoSpecification;
-import com.obezhenar.lcbotestapp.storage.greendao.specification.StoreFilterCriteria;
+import com.obezhenar.lcbotestapp.storage.greendao.specifications.store.StoreByIdGreenDaoSpecification;
+import com.obezhenar.lcbotestapp.storage.greendao.specifications.store.StoreFilterAndPagesGreenDaoSpecification;
+import com.obezhenar.lcbotestapp.storage.greendao.specifications.store.StoreFilterCriteria;
 
-public class GreenDaoStoreSpecificationFactory implements StoreSpecificationFactory {
+public class StoreGreenDaoSpecificationFactory implements StoreSpecificationFactory {
     public StoreDao storeDao;
 
-    public GreenDaoStoreSpecificationFactory(StoreDao storeDao) {
+    public StoreGreenDaoSpecificationFactory(StoreDao storeDao) {
         this.storeDao = storeDao;
     }
 

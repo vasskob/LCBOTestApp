@@ -1,18 +1,22 @@
 package com.obezhenar.lcbotestapp.storage.di;
 
 import android.content.Context;
+
 import com.obezhenar.lcbotestapp.domain.entiry.DaoMaster;
 import com.obezhenar.lcbotestapp.domain.entiry.DaoSession;
+import com.obezhenar.lcbotestapp.domain.entiry.Inventory;
 import com.obezhenar.lcbotestapp.domain.entiry.Product;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
+import com.obezhenar.lcbotestapp.storage.base.InventorySpecificationFactory;
+import com.obezhenar.lcbotestapp.storage.base.ProductSpecificationFactory;
 import com.obezhenar.lcbotestapp.storage.base.Repository;
 import com.obezhenar.lcbotestapp.storage.base.StoreSpecificationFactory;
 import com.obezhenar.lcbotestapp.storage.greendao.GreenDaoRepository;
-import com.obezhenar.lcbotestapp.storage.greendao.GreenDaoStoreSpecificationFactory;
+import com.obezhenar.lcbotestapp.storage.greendao.specification_factory.StoreGreenDaoSpecificationFactory;
+import com.obezhenar.lcbotestapp.storage.greendao.specification_factory.InventoryGreenDaoSpecificationFactory;
+import com.obezhenar.lcbotestapp.storage.greendao.specification_factory.ProductGreenDaoSpecificationFactory;
 
 import org.greenrobot.greendao.database.Database;
-
-import java.sql.SQLException;
 
 import javax.inject.Singleton;
 
@@ -46,7 +50,25 @@ public class StorageModule {
 
     @Provides
     @Singleton
+    public Repository<Inventory> provideInventoryRepository() {
+        return new GreenDaoRepository<>(daoSession.getInventoryDao());
+    }
+
+    @Provides
+    @Singleton
     public StoreSpecificationFactory provideStoreSpecificationFactory() {
-        return new GreenDaoStoreSpecificationFactory(daoSession.getStoreDao());
+        return new StoreGreenDaoSpecificationFactory(daoSession.getStoreDao());
+    }
+
+    @Provides
+    @Singleton
+    public ProductSpecificationFactory prvideProductSpecificationFactory() {
+        return new ProductGreenDaoSpecificationFactory(daoSession.getProductDao());
+    }
+
+    @Provides
+    @Singleton
+    public InventorySpecificationFactory provideInventorySpecificationFactory() {
+        return new InventoryGreenDaoSpecificationFactory(daoSession.getInventoryDao());
     }
 }

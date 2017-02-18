@@ -10,4 +10,8 @@ public class ShowStoreProductsEvent {
     public void setStoreId(long storeId) {
         this.storeId = storeId;
     }
+
+    public long getStoreId() {
+        return storeId;
+    }
 }

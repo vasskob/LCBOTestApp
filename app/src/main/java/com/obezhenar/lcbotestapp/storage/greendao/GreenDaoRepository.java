@@ -1,13 +1,11 @@
 package com.obezhenar.lcbotestapp.storage.greendao;
 
-import com.obezhenar.lcbotestapp.domain.entiry.StoreDao;
 import com.obezhenar.lcbotestapp.storage.base.Repository;
 import com.obezhenar.lcbotestapp.storage.base.Specification;
-import com.obezhenar.lcbotestapp.storage.greendao.specification.GreenDaoSpecification;
+import com.obezhenar.lcbotestapp.storage.greendao.specifications.GreenDaoSpecification;
 
 import org.greenrobot.greendao.AbstractDao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

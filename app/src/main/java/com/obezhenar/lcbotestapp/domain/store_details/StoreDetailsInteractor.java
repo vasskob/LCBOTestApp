@@ -2,7 +2,8 @@ package com.obezhenar.lcbotestapp.domain.store_details;
 
 import com.obezhenar.lcbotestapp.api.stores.StoresService;
 import com.obezhenar.lcbotestapp.domain.Interactor;
-import com.obezhenar.lcbotestapp.domain.entiry.SingleStoreApiResponse;
+import com.obezhenar.lcbotestapp.domain.entiry.ApiResponse;
+import com.obezhenar.lcbotestapp.domain.entiry.Inventory;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
 import com.obezhenar.lcbotestapp.storage.base.Repository;
 import com.obezhenar.lcbotestapp.storage.base.StoreSpecificationFactory;
@@ -17,7 +18,10 @@ public class StoreDetailsInteractor implements Interactor<Long, Observable<Store
     private StoresService storesService;
     private Repository<Store> storeRepository;
 
-    public StoreDetailsInteractor(StoreSpecificationFactory specificationFactory, StoresService storesService, Repository<Store> storeRepository) {
+    public StoreDetailsInteractor(
+            StoreSpecificationFactory specificationFactory,
+            StoresService storesService,
+            Repository<Store> storeRepository) {
         this.specificationFactory = specificationFactory;
         this.storesService = storesService;
         this.storeRepository = storeRepository;
@@ -34,9 +38,9 @@ public class StoreDetailsInteractor implements Interactor<Long, Observable<Store
 
     private void updateStoreFromApi(Long data) {
         try {
-            Response<SingleStoreApiResponse> response = storesService.loadStoreById(data).execute();
+            Response<ApiResponse<Store>> response = storesService.loadStoreById(data).execute();
             if (response.isSuccessful())
-                storeRepository.update(response.body().getStore());
+                storeRepository.update(response.body().getData());
         } catch (IOException e) {
             e.printStackTrace();
         }

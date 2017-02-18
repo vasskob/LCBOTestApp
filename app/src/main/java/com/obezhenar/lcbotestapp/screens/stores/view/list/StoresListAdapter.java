@@ -3,13 +3,11 @@ package com.obezhenar.lcbotestapp.screens.stores.view.list;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.obezhenar.lcbotestapp.R;
-import com.obezhenar.lcbotestapp.screens.base.OnItemClickListener;
+import com.obezhenar.lcbotestapp.screens.common.OnItemClickListener;
 import com.obezhenar.lcbotestapp.screens.stores.model.StoreModel;
-import com.paginate.recycler.LoadingListItemCreator;
 
 import java.util.ArrayList;
 import java.util.List;

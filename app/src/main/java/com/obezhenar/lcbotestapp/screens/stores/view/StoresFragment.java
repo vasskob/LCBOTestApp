@@ -23,7 +23,7 @@ import com.obezhenar.lcbotestapp.screens.stores.model.StoreModel;
 import com.obezhenar.lcbotestapp.screens.stores.model.StoresFilter;
 import com.obezhenar.lcbotestapp.screens.stores.presenter.StoresPresenter;
 import com.obezhenar.lcbotestapp.screens.stores.view.list.StoresListAdapter;
-import com.obezhenar.lcbotestapp.screens.stores.view.list.StoresLoadingListItemCreator;
+import com.obezhenar.lcbotestapp.screens.common.LoadingListItemCreatorImpl;
 import com.paginate.Paginate;
 
 import org.greenrobot.eventbus.EventBus;
@@ -94,7 +94,7 @@ public class StoresFragment extends Fragment implements StoresView {
             }
         }).setLoadingTriggerThreshold(2)
                 .addLoadingListItem(true)
-                .setLoadingListItemCreator(new StoresLoadingListItemCreator())
+                .setLoadingListItemCreator(new LoadingListItemCreatorImpl())
                 .build();
     }
 

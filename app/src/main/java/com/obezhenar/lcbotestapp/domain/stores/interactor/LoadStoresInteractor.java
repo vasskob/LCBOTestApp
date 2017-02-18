@@ -4,13 +4,13 @@ import android.support.annotation.NonNull;
 
 import com.obezhenar.lcbotestapp.api.stores.StoresService;
 import com.obezhenar.lcbotestapp.domain.Interactor;
+import com.obezhenar.lcbotestapp.domain.entiry.ApiResponse;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
-import com.obezhenar.lcbotestapp.domain.entiry.StoresResponse;
 import com.obezhenar.lcbotestapp.domain.stores.model.request.LoadStoresRequestModel;
 import com.obezhenar.lcbotestapp.storage.base.Repository;
 import com.obezhenar.lcbotestapp.storage.base.Specification;
 import com.obezhenar.lcbotestapp.storage.base.StoreSpecificationFactory;
-import com.obezhenar.lcbotestapp.storage.greendao.specification.StoreFilterCriteria;
+import com.obezhenar.lcbotestapp.storage.greendao.specifications.store.StoreFilterCriteria;
 
 import java.io.IOException;
 import java.util.List;
@@ -48,12 +48,12 @@ public class LoadStoresInteractor implements Interactor<LoadStoresRequestModel, 
 
     private List<Store> fetchStoresFromApi(@NonNull LoadStoresRequestModel data) {
         try {
-            Response<StoresResponse> response = storesService.loadStores(
+            Response<ApiResponse<List<Store>>> response = storesService.loadStores(
                     prepareWhereCondition(data),
                     data.getPageNumber()
             ).execute();
             if (response.isSuccessful())
-                return response.body().getStores();
+                return response.body().getData();
         } catch (IOException e) {
             e.printStackTrace();
         }
