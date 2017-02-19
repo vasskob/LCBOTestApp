@@ -1,14 +1,15 @@
 package com.obezhenar.lcbotestapp.domain.di;
 
-import android.content.Context;
-
-import com.obezhenar.lcbotestapp.R;
+import com.obezhenar.lcbotestapp.api.stores.ProductsService;
 import com.obezhenar.lcbotestapp.api.stores.StoresService;
 import com.obezhenar.lcbotestapp.domain.Interactor;
+import com.obezhenar.lcbotestapp.domain.all_products.LoadAllProductsInteractor;
+import com.obezhenar.lcbotestapp.domain.all_products.model.request.LoadAllProductsRequestModel;
 import com.obezhenar.lcbotestapp.domain.entiry.Inventory;
 import com.obezhenar.lcbotestapp.domain.entiry.Product;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
-import com.obezhenar.lcbotestapp.domain.products.ProductsInStoreInteractor;
+import com.obezhenar.lcbotestapp.domain.products_in_store.ProductsInStoreInteractor;
+import com.obezhenar.lcbotestapp.domain.products_in_store.model.request.ProductsInStoreRequestModel;
 import com.obezhenar.lcbotestapp.domain.store_details.StoreDetailsInteractor;
 import com.obezhenar.lcbotestapp.domain.stores.interactor.LoadStoresInteractor;
 import com.obezhenar.lcbotestapp.domain.stores.model.request.LoadStoresRequestModel;
@@ -19,7 +20,6 @@ import com.obezhenar.lcbotestapp.storage.base.StoreSpecificationFactory;
 
 import java.util.List;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -57,7 +57,8 @@ public class DomainModule {
 
     @Provides
     @Singleton
-    public Interactor<Long, Observable<List<Product>>> provideLoadProductInStoreInteractor(
+    public Interactor<ProductsInStoreRequestModel, Observable<List<Product>>>
+    provideLoadProductInStoreInteractor(
             StoresService storesService,
             ProductSpecificationFactory productSpecificationFactory,
             InventorySpecificationFactory inventorySpecificationFactory,
@@ -70,6 +71,21 @@ public class DomainModule {
                 inventorySpecificationFactory,
                 inventoryRepository,
                 productRepository
+        );
+    }
+
+    @Provides
+    @Singleton
+    public Interactor<LoadAllProductsRequestModel, Observable<List<Product>>>
+    provideLoadAllProductsRequestModelObservableInteractor(
+            ProductsService productsService,
+            Repository<Product> productRepository,
+            ProductSpecificationFactory productSpecificationFactory
+    ) {
+        return new LoadAllProductsInteractor(
+                productsService,
+                productRepository,
+                productSpecificationFactory
         );
     }
 }

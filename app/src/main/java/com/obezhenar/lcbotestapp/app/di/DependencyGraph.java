@@ -1,6 +1,7 @@
 package com.obezhenar.lcbotestapp.app.di;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.obezhenar.lcbotestapp.api.di.ApiModule;
 import com.obezhenar.lcbotestapp.domain.di.DomainModule;
@@ -12,12 +13,15 @@ import com.obezhenar.lcbotestapp.screens.stores.di.StoresComponent;
 import com.obezhenar.lcbotestapp.screens.stores.di.StoresModule;
 import com.obezhenar.lcbotestapp.storage.di.StorageModule;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DependencyGraph {
     private Context appContext;
     private AppComponent appComponent;
     private StoresComponent storesComponent;
     private StoreDetailsComponent storeDetailsComponent;
-    private ProductsComponent productsComponent;
+    private List<ProductsComponent> productsComponents = new ArrayList<>();
 
     public DependencyGraph(Context appContext) {
         this.appContext = appContext;
@@ -49,12 +53,15 @@ public class DependencyGraph {
     }
 
     public ProductsComponent initProductComponent() {
-        if (productsComponent == null)
-            productsComponent = appComponent.plusProductsComponent(new ProductsModule());
+        Log.d("Dagger", "Instance created");
+        ProductsComponent productsComponent = appComponent.plusProductsComponent(new ProductsModule());
+        productsComponents.add(productsComponent);
         return productsComponent;
     }
 
     public void releaseProductsComponent() {
-        productsComponent = null;
+        Log.d("Dagger", "All instances destroyed");
+        if (productsComponents.size() > 0)
+            productsComponents.clear();
     }
 }

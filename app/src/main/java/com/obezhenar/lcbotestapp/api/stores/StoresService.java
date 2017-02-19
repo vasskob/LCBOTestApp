@@ -36,7 +36,9 @@ public interface StoresService {
     @GET("/stores/{id}/products")
     @Headers(AUTH_TOKEN)
     Call<ApiResponse<List<Product>>> loadProductsInStore(
-            @Path("id") long storeId);
+            @Path("id") long storeId,
+            @Query("page") int page,
+            @Query("q") String query);
 
     @GET("/stores/{store_id}/products/{product_id}/inventory")
     @Headers(AUTH_TOKEN)

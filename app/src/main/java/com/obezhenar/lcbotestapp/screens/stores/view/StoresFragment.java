@@ -42,7 +42,7 @@ public class StoresFragment extends Fragment implements StoresView {
     ProgressBar progressBar;
     @Inject
     StoresPresenter presenter;
-    private boolean isItmesLoading;
+    private boolean isItemsLoading;
     private boolean hasLoadAllItems;
 
     private StoresFilter storesFilter = new StoresFilter();
@@ -79,13 +79,13 @@ public class StoresFragment extends Fragment implements StoresView {
         Paginate.with(storesRecyclerView, new Paginate.Callbacks() {
             @Override
             public void onLoadMore() {
-                isItmesLoading = true;
+                isItemsLoading = true;
                 presenter.onLoadMore();
             }
 
             @Override
             public boolean isLoading() {
-                return isItmesLoading;
+                return isItemsLoading;
             }
 
             @Override
@@ -151,7 +151,7 @@ public class StoresFragment extends Fragment implements StoresView {
     public void displayStores(List<StoreModel> stores) {
         if (stores.size() == 0)
             hasLoadAllItems = true;
-        isItmesLoading = false;
+        isItemsLoading = false;
         if (stores != null)
             adapter.setData(stores);
     }
@@ -168,8 +168,8 @@ public class StoresFragment extends Fragment implements StoresView {
 
     @Override
     public void setShowProgress(boolean showProgress) {
-        storesRecyclerView.setVisibility(showProgress && !isItmesLoading ? View.GONE : View.VISIBLE);
-        progressBar.setVisibility(showProgress && !isItmesLoading ? View.VISIBLE : View.GONE);
+        storesRecyclerView.setVisibility(showProgress && !isItemsLoading ? View.GONE : View.VISIBLE);
+        progressBar.setVisibility(showProgress && !isItemsLoading ? View.VISIBLE : View.GONE);
     }
 
     @Override

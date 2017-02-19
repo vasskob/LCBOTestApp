@@ -9,7 +9,7 @@ public interface ProductsPresenter {
 
     void onProductClick(ProductViewModel productViewModel);
 
-    void loadProductsForStore(long storeId);
+    void loadProductsForStore(long storeId, int page, String productCategory);
 
-    void loadAllProducts();
+    void loadMore();
 }

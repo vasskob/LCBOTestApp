@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.obezhenar.lcbotestapp.BuildConfig;
 import com.obezhenar.lcbotestapp.R;
+import com.obezhenar.lcbotestapp.api.stores.ProductsService;
 import com.obezhenar.lcbotestapp.api.stores.StoresService;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
 
@@ -33,5 +34,11 @@ public class ApiModule {
     @Singleton
     public StoresService provideStoresService() {
         return retrofit.create(StoresService.class);
+    }
+
+    @Provides
+    @Singleton
+    public ProductsService provideProductsService() {
+        return retrofit.create(ProductsService.class);
     }
 }

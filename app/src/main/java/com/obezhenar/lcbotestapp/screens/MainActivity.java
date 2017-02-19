@@ -3,6 +3,9 @@ package com.obezhenar.lcbotestapp.screens;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +18,7 @@ import com.obezhenar.lcbotestapp.screens.eventbus.ShowProductDetailsEvent;
 import com.obezhenar.lcbotestapp.screens.eventbus.ShowStoreDetailsEvent;
 import com.obezhenar.lcbotestapp.screens.eventbus.ShowStoreProductsEvent;
 import com.obezhenar.lcbotestapp.screens.products.view.ProductsFragment;
+import com.obezhenar.lcbotestapp.screens.products.view.ProductsPagerFragment;
 import com.obezhenar.lcbotestapp.screens.store_details.view.StoreDetailsFragment;
 import com.obezhenar.lcbotestapp.screens.stores.view.StoresFragment;
 
@@ -44,9 +48,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         EventBus.getDefault().register(this);
         setSupportActionBar(toolbar);
         initNavigation();
-        getSupportFragmentManager().beginTransaction()
+        displayStoresScreen();
+    }
+
+    private void displayStoresScreen() {
+        getSupportFragmentManager()
+                .beginTransaction()
                 .replace(R.id.content, new StoresFragment())
                 .commit();
+        getSupportFragmentManager().popBackStack();
     }
 
     private void initNavigation() {
@@ -66,8 +76,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-
+            case R.id.menu_item_stores:
+                displayStoresScreen();
+                break;
+            case R.id.menu_item_products:
+                showProductsFragment(-1);
+                break;
         }
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -80,9 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Subscribe
     public void onShowStoreProductsEvent(ShowStoreProductsEvent event) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, ProductsFragment.newInstance(event.getStoreId()))
-                .commit();
+        showProductsFragment(event.getStoreId());
     }
 
     @Subscribe
@@ -94,5 +108,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    private void showProductsFragment(long storeId) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content, ProductsPagerFragment.newInstance(storeId))
+                .commit();
     }
 }
