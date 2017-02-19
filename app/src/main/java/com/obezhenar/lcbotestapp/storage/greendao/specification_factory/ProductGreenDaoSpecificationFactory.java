@@ -14,8 +14,8 @@ public class ProductGreenDaoSpecificationFactory implements ProductSpecification
     }
 
     @Override
-    public Specification creteProductByIdSpecification(long productId, int from, int to) {
-        return new ProductByIdGreenDaoSpecification(productDao, productId, from, to);
+    public Specification creteProductByIdSpecification(long productId, String category, int from, int to) {
+        return new ProductByIdGreenDaoSpecification(productDao, productId, category, from, to);
     }
 
     @Override

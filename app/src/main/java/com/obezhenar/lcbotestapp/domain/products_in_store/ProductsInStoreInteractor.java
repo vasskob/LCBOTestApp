@@ -62,11 +62,11 @@ public class ProductsInStoreInteractor implements Interactor<ProductsInStoreRequ
                 for (Product product : products)
                     loadInventoryByProductId(data.getStoreId(), product.getId());
             } else {
-                loadProductsInStoreFromDb(data.getStoreId(), data.getPage(), subscriber);
+                loadProductsInStoreFromDb(data.getStoreId(), data.getCategory(), data.getPage(), subscriber);
             }
         } catch (IOException e) {
             e.printStackTrace();
-            loadProductsInStoreFromDb(data.getStoreId(), data.getPage(), subscriber);
+            loadProductsInStoreFromDb(data.getStoreId(), data.getCategory(), data.getPage(), subscriber);
         }
     }
 
@@ -77,18 +77,20 @@ public class ProductsInStoreInteractor implements Interactor<ProductsInStoreRequ
             inventoryRepository.add(inventoryResponse.body().getData());
     }
 
-    private void loadProductsInStoreFromDb(long storeId, int page, Subscriber subscriber) {
+    private void loadProductsInStoreFromDb(long storeId, String category, int page, Subscriber subscriber) {
         List<Inventory> inventories = inventoryRepository.query(
                 inventorySpecificationFactory.createInventoryByStoreIdSpecification(storeId));
         if (inventories != null && !inventories.isEmpty()) {
             List<Product> productsInStore = new ArrayList<Product>();
             for (Inventory inventory : inventories) {
-                Product product = productRepository.query(
+                List<Product> products = productRepository.query(
                         productSpecificationFactory.creteProductByIdSpecification(
                                 inventory.getProductId(),
+                                category,
                                 (page - 1) * PRODUCTS_PER_PAGE,
-                                ((page - 1) * PRODUCTS_PER_PAGE) + PRODUCTS_PER_PAGE)).get(0);
-                if (product != null) productsInStore.add(product);
+                                ((page - 1) * PRODUCTS_PER_PAGE) + PRODUCTS_PER_PAGE));
+                if (products != null && products.size() != 0)
+                    productsInStore.add(products.get(0));
             }
             subscriber.onNext(productsInStore);
         } else subscriber.onNext(new ArrayList<Product>());

@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .beginTransaction()
                 .replace(R.id.content, new StoresFragment())
                 .commit();
-        getSupportFragmentManager().popBackStack();
     }
 
     private void initNavigation() {
@@ -91,12 +90,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onShowStoreDetailsEvent(ShowStoreDetailsEvent event) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, StoreDetailsFragment.newInstance(event.getStoreId()))
+                .addToBackStack(null)
                 .commit();
     }
 
     @Subscribe
     public void onShowStoreProductsEvent(ShowStoreProductsEvent event) {
-        showProductsFragment(event.getStoreId());
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content, ProductsPagerFragment.newInstance(event.getStoreId()))
+                .addToBackStack(null)
+                .commit();
     }
 
     @Subscribe

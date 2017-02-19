@@ -34,7 +34,8 @@ public class LoadAllProductsInteractor implements Interactor<LoadAllProductsRequ
         return Observable.create(subscriber -> {
             try {
                 Response<ApiResponse<List<Product>>> response = productsService
-                        .loadAllProductsByQuery(data.getQuery()).execute();
+                        .loadAllProductsByQuery(
+                                data.getQuery(), data.getPage()).execute();
                 if (response.isSuccessful()) {
                     productRepository.addAll(response.body().getData());
                 }
