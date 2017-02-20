@@ -2,6 +2,8 @@ package com.obezhenar.lcbotestapp.app.di;
 
 import com.obezhenar.lcbotestapp.api.di.ApiModule;
 import com.obezhenar.lcbotestapp.domain.di.DomainModule;
+import com.obezhenar.lcbotestapp.screens.product_details.di.ProductDetailsComponent;
+import com.obezhenar.lcbotestapp.screens.product_details.di.ProductDetailsModule;
 import com.obezhenar.lcbotestapp.screens.products.di.ProductsComponent;
 import com.obezhenar.lcbotestapp.screens.products.di.ProductsModule;
 import com.obezhenar.lcbotestapp.screens.store_details.di.StoreDetailsComponent;
@@ -27,4 +29,6 @@ public interface AppComponent {
     StoreDetailsComponent plusStoreDetailsComponent(StoreDetailsModule module);
 
     ProductsComponent plusProductsComponent(ProductsModule module);
+
+    ProductDetailsComponent plusProductDetailsComponent(ProductDetailsModule module);
 }

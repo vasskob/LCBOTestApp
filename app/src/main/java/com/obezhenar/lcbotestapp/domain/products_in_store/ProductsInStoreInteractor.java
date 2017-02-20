@@ -1,6 +1,6 @@
 package com.obezhenar.lcbotestapp.domain.products_in_store;
 
-import com.obezhenar.lcbotestapp.api.stores.StoresService;
+import com.obezhenar.lcbotestapp.api.StoresService;
 import com.obezhenar.lcbotestapp.domain.Interactor;
 import com.obezhenar.lcbotestapp.domain.entiry.ApiResponse;
 import com.obezhenar.lcbotestapp.domain.entiry.Inventory;

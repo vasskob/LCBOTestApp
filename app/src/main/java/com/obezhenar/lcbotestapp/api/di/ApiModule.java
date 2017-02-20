@@ -2,11 +2,9 @@ package com.obezhenar.lcbotestapp.api.di;
 
 import android.content.Context;
 
-import com.obezhenar.lcbotestapp.BuildConfig;
 import com.obezhenar.lcbotestapp.R;
-import com.obezhenar.lcbotestapp.api.stores.ProductsService;
-import com.obezhenar.lcbotestapp.api.stores.StoresService;
-import com.obezhenar.lcbotestapp.domain.entiry.Store;
+import com.obezhenar.lcbotestapp.api.ProductsService;
+import com.obezhenar.lcbotestapp.api.StoresService;
 
 import javax.inject.Singleton;
 

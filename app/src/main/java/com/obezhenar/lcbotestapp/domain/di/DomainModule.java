@@ -1,13 +1,14 @@
 package com.obezhenar.lcbotestapp.domain.di;
 
-import com.obezhenar.lcbotestapp.api.stores.ProductsService;
-import com.obezhenar.lcbotestapp.api.stores.StoresService;
+import com.obezhenar.lcbotestapp.api.ProductsService;
+import com.obezhenar.lcbotestapp.api.StoresService;
 import com.obezhenar.lcbotestapp.domain.Interactor;
 import com.obezhenar.lcbotestapp.domain.all_products.LoadAllProductsInteractor;
 import com.obezhenar.lcbotestapp.domain.all_products.model.request.LoadAllProductsRequestModel;
 import com.obezhenar.lcbotestapp.domain.entiry.Inventory;
 import com.obezhenar.lcbotestapp.domain.entiry.Product;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
+import com.obezhenar.lcbotestapp.domain.product_details.LoadProductDetailsInteractor;
 import com.obezhenar.lcbotestapp.domain.products_in_store.ProductsInStoreInteractor;
 import com.obezhenar.lcbotestapp.domain.products_in_store.model.request.ProductsInStoreRequestModel;
 import com.obezhenar.lcbotestapp.domain.store_details.StoreDetailsInteractor;
@@ -86,6 +87,20 @@ public class DomainModule {
                 productsService,
                 productRepository,
                 productSpecificationFactory
+        );
+    }
+
+    @Provides
+    @Singleton
+    public Interactor<Long, Observable<Product>> provideLoadProductDetailsInteractor(
+            ProductSpecificationFactory productSpecificationFactory,
+            ProductsService service,
+            Repository<Product> productRepository
+    ) {
+        return new LoadProductDetailsInteractor(
+                productSpecificationFactory,
+                service,
+                productRepository
         );
     }
 }

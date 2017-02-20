@@ -1,4 +1,4 @@
-package com.obezhenar.lcbotestapp.api.stores;
+package com.obezhenar.lcbotestapp.api;
 
 import com.obezhenar.lcbotestapp.BuildConfig;
 import com.obezhenar.lcbotestapp.domain.entiry.ApiResponse;
@@ -9,6 +9,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ProductsService {
@@ -19,4 +20,10 @@ public interface ProductsService {
     Call<ApiResponse<List<Product>>> loadAllProductsByQuery(
             @Query("q") String where,
             @Query("page") Integer page);
+
+    @GET("/products/{id}")
+    @Headers(AUTH_TOKEN)
+    Call<ApiResponse<Product>> loadProductById(
+            @Path("id") Long productId
+    );
 }

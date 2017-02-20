@@ -1,4 +1,4 @@
-package com.obezhenar.lcbotestapp.api.stores;
+package com.obezhenar.lcbotestapp.api;
 
 import com.obezhenar.lcbotestapp.BuildConfig;
 import com.obezhenar.lcbotestapp.domain.entiry.ApiResponse;

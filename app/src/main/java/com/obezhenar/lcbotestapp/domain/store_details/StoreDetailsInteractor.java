@@ -1,9 +1,8 @@
 package com.obezhenar.lcbotestapp.domain.store_details;
 
-import com.obezhenar.lcbotestapp.api.stores.StoresService;
+import com.obezhenar.lcbotestapp.api.StoresService;
 import com.obezhenar.lcbotestapp.domain.Interactor;
 import com.obezhenar.lcbotestapp.domain.entiry.ApiResponse;
-import com.obezhenar.lcbotestapp.domain.entiry.Inventory;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;
 import com.obezhenar.lcbotestapp.storage.base.Repository;
 import com.obezhenar.lcbotestapp.storage.base.StoreSpecificationFactory;

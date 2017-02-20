@@ -1,6 +1,6 @@
 package com.obezhenar.lcbotestapp.domain.all_products;
 
-import com.obezhenar.lcbotestapp.api.stores.ProductsService;
+import com.obezhenar.lcbotestapp.api.ProductsService;
 import com.obezhenar.lcbotestapp.domain.Interactor;
 import com.obezhenar.lcbotestapp.domain.all_products.model.request.LoadAllProductsRequestModel;
 import com.obezhenar.lcbotestapp.domain.entiry.ApiResponse;
@@ -11,7 +11,6 @@ import com.obezhenar.lcbotestapp.storage.base.Repository;
 import java.io.IOException;
 import java.util.List;
 
-import retrofit2.Call;
 import retrofit2.Response;
 import rx.Observable;
 

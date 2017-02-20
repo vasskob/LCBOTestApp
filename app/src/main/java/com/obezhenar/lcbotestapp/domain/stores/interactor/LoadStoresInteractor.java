@@ -2,7 +2,7 @@ package com.obezhenar.lcbotestapp.domain.stores.interactor;
 
 import android.support.annotation.NonNull;
 
-import com.obezhenar.lcbotestapp.api.stores.StoresService;
+import com.obezhenar.lcbotestapp.api.StoresService;
 import com.obezhenar.lcbotestapp.domain.Interactor;
 import com.obezhenar.lcbotestapp.domain.entiry.ApiResponse;
 import com.obezhenar.lcbotestapp.domain.entiry.Store;

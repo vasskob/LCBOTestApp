@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.obezhenar.lcbotestapp.api.di.ApiModule;
 import com.obezhenar.lcbotestapp.domain.di.DomainModule;
+import com.obezhenar.lcbotestapp.screens.product_details.di.ProductDetailsComponent;
+import com.obezhenar.lcbotestapp.screens.product_details.di.ProductDetailsModule;
 import com.obezhenar.lcbotestapp.screens.products.di.ProductsComponent;
 import com.obezhenar.lcbotestapp.screens.products.di.ProductsModule;
 import com.obezhenar.lcbotestapp.screens.store_details.di.StoreDetailsComponent;
@@ -22,6 +24,7 @@ public class DependencyGraph {
     private StoresComponent storesComponent;
     private StoreDetailsComponent storeDetailsComponent;
     private List<ProductsComponent> productsComponents = new ArrayList<>();
+    private ProductDetailsComponent productDetailsComponent;
 
     public DependencyGraph(Context appContext) {
         this.appContext = appContext;
@@ -53,15 +56,23 @@ public class DependencyGraph {
     }
 
     public ProductsComponent initProductComponent() {
-        Log.d("Dagger", "Instance created");
         ProductsComponent productsComponent = appComponent.plusProductsComponent(new ProductsModule());
         productsComponents.add(productsComponent);
         return productsComponent;
     }
 
     public void releaseProductsComponent() {
-        Log.d("Dagger", "All instances destroyed");
         if (productsComponents.size() > 0)
             productsComponents.clear();
+    }
+
+    public ProductDetailsComponent initProductDetailsComponent() {
+        if (productDetailsComponent == null)
+            productDetailsComponent = appComponent.plusProductDetailsComponent(new ProductDetailsModule());
+        return productDetailsComponent;
+    }
+
+    public void releaseProductDetailsComponent() {
+        productDetailsComponent = null;
     }
 }
