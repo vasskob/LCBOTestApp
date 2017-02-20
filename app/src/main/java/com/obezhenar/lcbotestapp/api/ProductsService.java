@@ -18,7 +18,8 @@ public interface ProductsService {
     @GET("/products")
     @Headers(AUTH_TOKEN)
     Call<ApiResponse<List<Product>>> loadAllProductsByQuery(
-            @Query("q") String where,
+            @Query("q") String query,
+            @Query("where") String where,
             @Query("page") Integer page);
 
     @GET("/products/{id}")

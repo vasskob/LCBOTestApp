@@ -14,4 +14,9 @@
     <string name="has_vintage_corner">Has vintage corner</string>
     <string name="make_call">Make Call</string>
     <string name="show_products">Show products</string>
+    <string name="no_results">No results</string>
+    <string name="search">Search</string>
+    <string name="is_seasonal">Is seasonal</string>
+    <string name="is_kosher">Is kosher</string>
+    <string name="has_limited_time_offer">Has limited time offer</string>
 </resources>

@@ -27,7 +27,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProductsFragment extends Fragment implements ProductsView {
+public class
+ProductsFragment extends Fragment implements ProductsView {
     public static final String TAG = ProductsFragment.class.getName();
     private static final String KEY_STORE_ID = ProductsFragment.class.getName() + ".KEY_STORE_ID";
     private static final String KEY_PRODUCT_CATEGORY = ProductsFragment.class.getName() + ".KEY_PRODUCT_CATEGORY";

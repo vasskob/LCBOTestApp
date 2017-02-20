@@ -20,6 +20,7 @@ import com.obezhenar.lcbotestapp.screens.eventbus.ShowStoreProductsEvent;
 import com.obezhenar.lcbotestapp.screens.product_details.view.ProductDetailsDialog;
 import com.obezhenar.lcbotestapp.screens.products.view.ProductsFragment;
 import com.obezhenar.lcbotestapp.screens.products.view.ProductsPagerFragment;
+import com.obezhenar.lcbotestapp.screens.search.view.SearchByProductsFragment;
 import com.obezhenar.lcbotestapp.screens.store_details.view.StoreDetailsFragment;
 import com.obezhenar.lcbotestapp.screens.stores.view.StoresFragment;
 
@@ -83,9 +84,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_item_products:
                 showProductsFragment(-1);
                 break;
+            case R.id.menu_item_search_products:
+                showSearchFragment();
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showSearchFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content, new SearchByProductsFragment())
+                .commit();
     }
 
     @Subscribe

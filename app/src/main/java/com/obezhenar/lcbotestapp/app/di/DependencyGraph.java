@@ -1,7 +1,6 @@
 package com.obezhenar.lcbotestapp.app.di;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.obezhenar.lcbotestapp.api.di.ApiModule;
 import com.obezhenar.lcbotestapp.domain.di.DomainModule;
@@ -9,6 +8,8 @@ import com.obezhenar.lcbotestapp.screens.product_details.di.ProductDetailsCompon
 import com.obezhenar.lcbotestapp.screens.product_details.di.ProductDetailsModule;
 import com.obezhenar.lcbotestapp.screens.products.di.ProductsComponent;
 import com.obezhenar.lcbotestapp.screens.products.di.ProductsModule;
+import com.obezhenar.lcbotestapp.screens.search.di.SearchByProductsComponent;
+import com.obezhenar.lcbotestapp.screens.search.di.SearchByProductsModule;
 import com.obezhenar.lcbotestapp.screens.store_details.di.StoreDetailsComponent;
 import com.obezhenar.lcbotestapp.screens.store_details.di.StoreDetailsModule;
 import com.obezhenar.lcbotestapp.screens.stores.di.StoresComponent;
@@ -25,6 +26,7 @@ public class DependencyGraph {
     private StoreDetailsComponent storeDetailsComponent;
     private List<ProductsComponent> productsComponents = new ArrayList<>();
     private ProductDetailsComponent productDetailsComponent;
+    private SearchByProductsComponent searchByProducts;
 
     public DependencyGraph(Context appContext) {
         this.appContext = appContext;
@@ -74,5 +76,15 @@ public class DependencyGraph {
 
     public void releaseProductDetailsComponent() {
         productDetailsComponent = null;
+    }
+
+    public SearchByProductsComponent initSearchByProductsComponent() {
+        if(searchByProducts == null)
+            searchByProducts = appComponent.plusSearchByProductsComponent(new SearchByProductsModule());
+        return searchByProducts;
+    }
+
+    public void releaseSearchByProductsComponent() {
+        searchByProducts = null;
     }
 }

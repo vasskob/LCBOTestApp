@@ -11,6 +11,8 @@ import com.obezhenar.lcbotestapp.domain.entiry.Store;
 import com.obezhenar.lcbotestapp.domain.product_details.LoadProductDetailsInteractor;
 import com.obezhenar.lcbotestapp.domain.products_in_store.ProductsInStoreInteractor;
 import com.obezhenar.lcbotestapp.domain.products_in_store.model.request.ProductsInStoreRequestModel;
+import com.obezhenar.lcbotestapp.domain.search.ProductSearchInteractor;
+import com.obezhenar.lcbotestapp.domain.search.ProductsSearchRequestModel;
 import com.obezhenar.lcbotestapp.domain.store_details.StoreDetailsInteractor;
 import com.obezhenar.lcbotestapp.domain.stores.interactor.LoadStoresInteractor;
 import com.obezhenar.lcbotestapp.domain.stores.model.request.LoadStoresRequestModel;
@@ -47,8 +49,7 @@ public class DomainModule {
     public Interactor<Long, Observable<Store>> provideLoadStoreDetailsInteractor(
             StoreSpecificationFactory specificationFactory,
             StoresService storesService,
-            Repository<Store> storeRepository
-    ) {
+            Repository<Store> storeRepository) {
         return new StoreDetailsInteractor(
                 specificationFactory,
                 storesService,
@@ -64,8 +65,7 @@ public class DomainModule {
             ProductSpecificationFactory productSpecificationFactory,
             InventorySpecificationFactory inventorySpecificationFactory,
             Repository<Inventory> inventoryRepository,
-            Repository<Product> productRepository
-    ) {
+            Repository<Product> productRepository) {
         return new ProductsInStoreInteractor(
                 storesService,
                 productSpecificationFactory,
@@ -81,8 +81,7 @@ public class DomainModule {
     provideLoadAllProductsRequestModelObservableInteractor(
             ProductsService productsService,
             Repository<Product> productRepository,
-            ProductSpecificationFactory productSpecificationFactory
-    ) {
+            ProductSpecificationFactory productSpecificationFactory) {
         return new LoadAllProductsInteractor(
                 productsService,
                 productRepository,
@@ -92,15 +91,29 @@ public class DomainModule {
 
     @Provides
     @Singleton
-    public Interactor<Long, Observable<Product>> provideLoadProductDetailsInteractor(
+    public Interactor<Long, Observable<Product>>
+    provideLoadProductDetailsInteractor(
             ProductSpecificationFactory productSpecificationFactory,
             ProductsService service,
-            Repository<Product> productRepository
-    ) {
+            Repository<Product> productRepository) {
         return new LoadProductDetailsInteractor(
                 productSpecificationFactory,
                 service,
                 productRepository
+        );
+    }
+
+    @Provides
+    @Singleton
+    public Interactor<ProductsSearchRequestModel, Observable<List<Product>>>
+    provideSearchProductsInteractor(
+            ProductSpecificationFactory specificationFactory,
+            Repository<Product> productRepository,
+            ProductsService productsService) {
+        return new ProductSearchInteractor(
+                specificationFactory,
+                productRepository,
+                productsService
         );
     }
 }

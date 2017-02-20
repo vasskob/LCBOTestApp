@@ -34,7 +34,7 @@ public class LoadAllProductsInteractor implements Interactor<LoadAllProductsRequ
             try {
                 Response<ApiResponse<List<Product>>> response = productsService
                         .loadAllProductsByQuery(
-                                data.getQuery(), data.getPage()).execute();
+                               "", data.getQuery(), data.getPage()).execute();
                 if (response.isSuccessful()) {
                     productRepository.addAll(response.body().getData());
                 }
