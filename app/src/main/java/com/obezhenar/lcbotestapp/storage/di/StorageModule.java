@@ -15,8 +15,11 @@ import com.obezhenar.lcbotestapp.storage.greendao.GreenDaoRepository;
 import com.obezhenar.lcbotestapp.storage.greendao.specification_factory.StoreGreenDaoSpecificationFactory;
 import com.obezhenar.lcbotestapp.storage.greendao.specification_factory.InventoryGreenDaoSpecificationFactory;
 import com.obezhenar.lcbotestapp.storage.greendao.specification_factory.ProductGreenDaoSpecificationFactory;
+import com.obezhenar.lcbotestapp.storage.preferennces.LcboSharedPreferencesStorage;
 
 import org.greenrobot.greendao.database.Database;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
@@ -27,11 +30,18 @@ import dagger.Provides;
 public class StorageModule {
     private Context context;
     private DaoSession daoSession;
+    private LcboSharedPreferencesStorage preferencesStorage;
 
     public StorageModule(Context context) {
         this.context = context;
+        preferencesStorage = new LcboSharedPreferencesStorage(context);
         DaoMaster.OpenHelper openHelper = new DaoMaster.DevOpenHelper(context, "lcbo_cache");
         Database database = openHelper.getWritableDb();
+        if (System.currentTimeMillis() - preferencesStorage.getDbDropTime() > TimeUnit.HOURS.toMillis(24)) {
+            DaoMaster.dropAllTables(database, true);
+            openHelper.onCreate(database);
+            preferencesStorage.saveDatabaseDropTime(System.currentTimeMillis());
+        }
         daoSession = new DaoMaster(database).newSession();
     }
 
