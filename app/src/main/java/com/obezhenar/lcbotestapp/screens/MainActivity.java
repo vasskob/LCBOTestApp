@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.obezhenar.lcbotestapp.R;
+import com.obezhenar.lcbotestapp.screens.about.view.AboutFragment;
 import com.obezhenar.lcbotestapp.screens.eventbus.ShowProductDetailsEvent;
 import com.obezhenar.lcbotestapp.screens.eventbus.ShowStoreDetailsEvent;
 import com.obezhenar.lcbotestapp.screens.eventbus.ShowStoreProductsEvent;
@@ -87,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_item_search_products:
                 showSearchFragment();
                 break;
+            case R.id.menu_item_about:
+                showAboutScreen();
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -95,6 +99,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void showSearchFragment() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, new SearchByProductsFragment())
+                .commit();
+    }
+
+    private void showAboutScreen() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content, new AboutFragment())
                 .commit();
     }
 
